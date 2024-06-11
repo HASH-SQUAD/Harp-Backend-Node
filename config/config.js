@@ -5,7 +5,7 @@ module.exports = {
 	development: {
 		username: process.env.DB_ID,
 		password: process.env.DB_PW,
-		database: 'MemoryBread',
+		database: 'HARP',
 		host: process.env.DB_POST,
 		port: process.env.DB_PORT,
 		dialect: 'mysql',
@@ -13,7 +13,7 @@ module.exports = {
 	test: {
 		username: process.env.DB_ID,
 		password: process.env.DB_PW,
-		database: 'MemoryBread',
+		database: 'HARP',
 		host: process.env.DB_POST,
 		port: process.env.DB_PORT,
 		dialect: 'mysql',
@@ -21,7 +21,7 @@ module.exports = {
 	production: {
 		username: process.env.DB_ID,
 		password: process.env.DB_PW,
-		database: 'MemoryBread',
+		database: 'HARP',
 		host: process.env.DB_POST,
 		port: process.env.DB_PORT,
 		dialect: 'mysql',

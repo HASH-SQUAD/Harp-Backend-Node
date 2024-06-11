@@ -3,13 +3,14 @@ const router = express.Router();
 const { Users } = require('../models');
 
 router.post('/', async (req, res) => {
-	const { googleId, email, name, profileImg, provider } = req.body;
+	const { userId, email, name, profileImg, provider } = req.body;
+	
 	// 유저아이디 존재여부 확인
-	const user = await Users.findOne({ where: { googleId: googleId } });
+	const user = await Users.findOne({ where: { userId: userId } });
 
 	if (!user) {
 		Users.create({
-			googleId: googleId,
+			userId: userId,
 			name: name,
 			email: email,
 			profileImg: profileImg,

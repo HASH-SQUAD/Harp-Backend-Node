@@ -7,7 +7,7 @@ const getProfile = (profile) => {
 	if (emails?.length) {
 		const email = emails[0].value;
 		return {
-			googleId: id,
+			userId: id,
 			email: email,
 			name: displayName,
 			profileImg: picture,
@@ -22,7 +22,7 @@ passport.use(
 		{
 			clientID: process.env.GOOGLE_CLIENT_ID,
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-			callbackURL: 'http://localhost:3000/auth/google/callback',
+			callbackURL: `${process.env.SERVER_ORIGIN}/auth/google/callback`,
 			passReqToCallback: true,
 		},
 		async (request, accessToken, refreshToken, profile, done) => {
@@ -31,7 +31,7 @@ passport.use(
 
 			try {
 				const existingGoogleAccount = await Users.findOne({
-					where: { googleId: profile.id },
+					where: { userId: profile.id },
 				});
 
 				if (!existingGoogleAccount) {
