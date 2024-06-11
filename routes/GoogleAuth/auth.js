@@ -1,6 +1,7 @@
 const passport = require('passport');
 const { Users } = require('../../models');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const { generateAccessToken, generateRefreshToken } = require('../../tokens/jwt');
 
 const getProfile = (profile) => {
   const { id, displayName, emails, provider, picture } = profile;
@@ -8,10 +9,10 @@ const getProfile = (profile) => {
     const email = emails[0].value;
     return {
       userId: id,
-      email: email,
+      email,
       name: displayName,
       profileImg: picture,
-      provider: provider,
+      provider,
     };
   }
   return null;

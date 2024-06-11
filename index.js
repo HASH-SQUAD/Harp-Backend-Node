@@ -17,6 +17,11 @@ app.get('/', (req, res) => {
         <h1>OAuth</h1>
         <a href="/auth/google">LogIn</a>
         <a href="/auth/google/logout">LogOut</a>
+
+        <br />
+
+        <a href="/auth/kakao">LogIn</a>
+        <a href="/auth/kakao/logout">LogOut</a>
     `);
 });
 
