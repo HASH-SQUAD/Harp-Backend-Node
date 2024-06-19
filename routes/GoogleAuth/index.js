@@ -39,6 +39,7 @@ const Logout = require('./Logout.js');
 router.get('/google/logout', Logout);
 
 const Refresh = require('./Refresh.js');
+const authUtil = require('../../response/authUtil.js');
 router.post('/google/token', Refresh);
 
 module.exports = router;

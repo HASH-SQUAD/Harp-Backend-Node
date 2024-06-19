@@ -18,9 +18,14 @@ router.get('/kakao', Login);
 
 const Callback = require('./Callback.js');
 router.get('/kakao/callback', Callback, (req, res) => {
-	const accessToken = generateAccessToken(req.user.id);
-	const refreshToken = generateRefreshToken(req.user.id);
-	res.json({ accessToken, refreshToken });
+	const accessToken = generateAccessToken(req.user.dataValues.id);
+	const refreshToken = req.user.refreshToken;
+	res.status(200).send(
+		authUtil.successTrue(200, '카카오로그인 성공', {
+			accessToken: accessToken,
+			refreshToken: refreshToken,
+		})
+	);
 });
 
 const Fail = require('./Fail.js');
@@ -34,6 +39,7 @@ const Logout = require('./Logout.js');
 router.get('/kakao/logout', Logout);
 
 const Refresh = require('./Refresh.js');
+const authUtil = require('../../response/authUtil.js');
 router.post('/kakao/token', Refresh);
 
 module.exports = router;
