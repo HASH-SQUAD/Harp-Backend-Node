@@ -28,26 +28,28 @@ passport.use(
     },
     async (request, accessToken, refreshToken, profile, done) => {
       try {
-        const existingGoogleAccount = await Users.findOne({
-          where: { userId: profile.id },
-        });
+        let user = await Users.findOne({ where: { userId: profile.id } });
 
-        if (!existingGoogleAccount) {
-          const existingEmailAccount = await Users.findOne({
-            where: { email: getProfile(profile).email },
-          });
-
-          if (!existingEmailAccount) {
-            const newAccount = await Users.create(getProfile(profile));
-            return done(null, newAccount);
-          }
-          return done(null, existingEmailAccount);
+        if (!user) {
+          const profileData = {
+            userId: profile.id,
+            email: profile.emails[0].value,
+            name: profile.displayName,
+            profileImg: profile.photos[0].value,
+            provider: 'google',
+        };
+            const newRefreshToken = generateRefreshToken(profile.id);
+            user = await Users.create({ ...profileData, refreshToken: newRefreshToken });
+        } else {
+            const newRefreshToken = generateRefreshToken(profile.id);
+            await user.update({ refreshToken: newRefreshToken });
         }
-        return done(null, existingGoogleAccount);
-      } catch (err) {
+
+        return done(null, user);
+    } catch (err) {
         console.log(err);
         return done(err, null);
-      }
+    }
     }
   )
 );

@@ -2,7 +2,10 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const session = require('express-session');
-const { generateAccessToken, generateRefreshToken } = require('../../tokens/jwt');
+const {
+	generateAccessToken,
+	generateRefreshToken,
+} = require('../../tokens/jwt');
 
 router.use(session({ secret: 'cats' }));
 router.use(passport.initialize());
@@ -14,10 +17,15 @@ const Login = require('./Login.js');
 router.get('/google', Login);
 
 const Callback = require('./Callback.js');
-router.get('/google/callback', Callback, (req, res) => {
-  const accessToken = generateAccessToken(req.user.id);
-  const refreshToken = generateRefreshToken(req.user.id);
-  res.json({ accessToken, refreshToken });
+router.get('/google/callback', Callback, async (req, res) => {
+	const accessToken = generateAccessToken(req.user.dataValues.id);
+	const refreshToken = req.user.refreshToken;
+	res.status(200).send(
+		authUtil.successTrue(200, '구글로그인 성공', {
+			accessToken: accessToken,
+			refreshToken: refreshToken,
+		})
+	);
 });
 
 const Fail = require('./Fail.js');
