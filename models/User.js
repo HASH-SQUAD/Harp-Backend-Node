@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			userId: {
 				type: DataTypes.STRING,
+				primaryKey: true,
 				allowNull: false,
 			},
 			email: {
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: true,
 			},
 			gender: {
-				type: DataTypes.ENUM('male, female'),
+				type: DataTypes.ENUM('male', 'female'),
 				allowNull: true,
 			},
 			birthdate: {
@@ -31,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: true,
 			},
 			authority: {
-				type: DataTypes.ENUM('admin, user'),
+				type: DataTypes.ENUM('admin', 'user'),
 				allowNull: true,
 			},
 			profileImg: {
@@ -44,11 +45,14 @@ module.exports = (sequelize, DataTypes) => {
 			},
 		},
 		{
-			paranoid: true,
 			charset: 'utf8',
 			collate: 'utf8_general_ci',
 		}
 	);
+
+	Users.associate = models => {
+		Users.hasMany(models.Survey, { foreignKey: 'userId', sourceKey: 'userId' });
+	};
 
 	return Users;
 };
