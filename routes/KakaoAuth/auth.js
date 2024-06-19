@@ -1,4 +1,3 @@
-// routes/GoogleAuth/auth.js (or a similar file for Kakao auth)
 const passport = require('passport');
 const { Users } = require('../../models');
 const KakaoStrategy = require('passport-kakao').Strategy;
@@ -6,16 +5,7 @@ const {
 	generateAccessToken,
 	generateRefreshToken,
 } = require('../../tokens/jwt');
-
-const getProfile = profile => {
-	return {
-		userId: profile._json.id,
-		email: profile._json.kakao_account.email,
-		name: profile._json.kakao_account.profile.nickname,
-		profileImg: profile._json.kakao_account.profile.thumbnail_image_url,
-		provider: 'kakao',
-	};
-};
+const { where } = require('sequelize');
 
 passport.use(
 	new KakaoStrategy(
@@ -26,29 +16,37 @@ passport.use(
 		},
 		async (request, accessToken, refreshToken, profile, done) => {
 			try {
-				const existingUser = await Users.findOne({
+				const user = await Users.findOne({
 					where: { userId: profile.id },
 				});
+				console.log(profile);
 
-				if (!existingUser) {
-					const profileData = getProfile(profile);
+				if (!user) {
+					const profileData = {
+						userId: profile._json.id,
+						email: profile._json.kakao_account.email,
+						name: profile._json.kakao_account.profile.nickname,
+						profileImg: profile._json.kakao_account.profile.thumbnail_image_url,
+						provider: 'kakao',
+					};
 					if (!profileData.email) {
 						return done(null, false, {
-							message: 'No email associated with this account',
+							message: '이메일이 존재하지 않음',
 						});
 					}
 
-					const existingEmailAccount = await Users.findOne({
-						where: { email: profileData.email },
+					const newRefreshToken = generateRefreshToken(profile.id);
+					const newAccount = await Users.create({
+						...profileData,
+						refreshToken: newRefreshToken,
 					});
-
-					if (!existingEmailAccount) {
-						const newAccount = await Users.create(profileData);
-						return done(null, newAccount);
-					}
-					return done(null, existingEmailAccount);
+					return done(null, newAccount);
+				} else {
+					const newRefreshToken = generateRefreshToken(profile.id);
+					console.log(newRefreshToken);
+					await user.update({ refreshToken: newRefreshToken });
+					return done(null, user);
 				}
-				return done(null, existingUser);
 			} catch (err) {
 				console.log(err);
 				return done(err, null);

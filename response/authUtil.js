@@ -26,7 +26,7 @@ const authUtil = {
 	},
 	unknownError: data => {
 		return {
-			status: 501,
+			status: 500,
 			success: false,
 			message: '알수 없는 에러가 발생하였습니다. Console을 확인해주세요',
 			data: data,
