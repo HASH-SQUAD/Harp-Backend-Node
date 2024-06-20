@@ -13,7 +13,7 @@ passport.use(
 		async (request, accessToken, refreshToken, profile, done) => {
 			try {
 				const user = await Users.findOne({
-					where: { userId: profile._json.kakao_account.email },
+					where: { email: profile._json.kakao_account.email },
 				});
 
 				if (!user) {
