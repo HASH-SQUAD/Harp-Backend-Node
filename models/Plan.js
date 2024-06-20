@@ -1,4 +1,3 @@
-// ./Plan.js
 module.exports = (sequelize, DataTypes) => {
 	const Plan = sequelize.define(
 		'Plan',
