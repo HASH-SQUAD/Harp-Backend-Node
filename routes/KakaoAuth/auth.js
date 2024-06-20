@@ -1,11 +1,7 @@
 const passport = require('passport');
 const { Users } = require('../../models');
 const KakaoStrategy = require('passport-kakao').Strategy;
-const {
-	generateAccessToken,
-	generateRefreshToken,
-} = require('../../tokens/jwt');
-const { where } = require('sequelize');
+const { generateRefreshToken } = require('../../tokens/jwt');
 
 passport.use(
 	new KakaoStrategy(
@@ -33,7 +29,6 @@ passport.use(
 							message: '이메일이 존재하지 않음',
 						});
 					}
-
 					const newRefreshToken = generateRefreshToken(
 						profile._json.kakao_account.email
 					);
@@ -43,8 +38,9 @@ passport.use(
 					});
 					return done(null, newAccount);
 				} else {
-					const newRefreshToken = generateRefreshToken(profile.id);
-					console.log(newRefreshToken);
+					const newRefreshToken = generateRefreshToken(
+						profile._json.kakao_account.email
+					);
 					await user.update({ refreshToken: newRefreshToken });
 					return done(null, user);
 				}
