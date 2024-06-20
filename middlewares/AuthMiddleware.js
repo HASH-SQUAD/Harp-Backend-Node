@@ -17,6 +17,7 @@ const validateToken = async (req, res, next) => {
 	}
 
 	const userId = decoded.id;
+	// console.log(decoded);
 	const user = await Users.findOne({ where: { "id": userId } });
 
 	if (!user) {

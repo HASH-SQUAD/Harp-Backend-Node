@@ -19,7 +19,6 @@ passport.use(
 				const user = await Users.findOne({
 					where: { userId: profile.id },
 				});
-				console.log(profile);
 
 				if (!user) {
 					const profileData = {
@@ -35,7 +34,9 @@ passport.use(
 						});
 					}
 
-					const newRefreshToken = generateRefreshToken(profile.id);
+					const newRefreshToken = generateRefreshToken(
+						profile._json.kakao_account.email
+					);
 					const newAccount = await Users.create({
 						...profileData,
 						refreshToken: newRefreshToken,

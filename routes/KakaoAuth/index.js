@@ -18,7 +18,7 @@ router.get('/kakao', Login);
 
 const Callback = require('./Callback.js');
 router.get('/kakao/callback', Callback, (req, res) => {
-	const accessToken = generateAccessToken(req.user.dataValues.id);
+	const accessToken = generateAccessToken(req.user.dataValues.email);
 	const refreshToken = req.user.refreshToken;
 	res.status(200).send(
 		authUtil.successTrue(200, '카카오로그인 성공', {
