@@ -19,6 +19,7 @@ if (config.use_env_variable) {
 		operatorsAliases: false,
 		timezone: '+09:00',
 		port: config.port,
+		logging: false
 	});
 }
 

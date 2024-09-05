@@ -13,7 +13,7 @@ router.use('/jwt', jwtRouter);
 
 // 새계정 생성 라우터
 const NewAccountSignUpRouter = require('./NewAccountSignUp')
-router.unsubscribe('/newaccount', NewAccountSignUpRouter)
+router.use('/newaccount', NewAccountSignUpRouter)
 
 // 채팅 라우터
 const ChattingRouter = require('./Chatting');
