@@ -19,7 +19,7 @@ passport.use(
 
         if (!user) {
           const profileData = {
-            userId: profile.id,
+            authId: profile.id,
             email: profile.emails[0].value,
             name: profile.displayName,
             profileImg: profile.photos[0].value,

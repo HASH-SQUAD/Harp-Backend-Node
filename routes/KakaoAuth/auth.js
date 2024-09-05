@@ -19,7 +19,7 @@ passport.use(
 
         if (!user) {
           const profileData = {
-            userId: profile._json.id,
+            authId: profile._json.id,
             email: profile._json.kakao_account.email,
             name: profile._json.kakao_account.profile.nickname,
             profileImg: profile._json.kakao_account.profile.thumbnail_image_url,
