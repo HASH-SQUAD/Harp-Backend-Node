@@ -18,7 +18,7 @@ router.get('/google', Login);
 
 const Callback = require('./Callback.js');
 router.get('/google/callback', Callback, async (req, res) => {
-	const accessToken = generateAccessToken(req.user.dataValues.id);
+	const accessToken = generateAccessToken(req.user.dataValues.email);
 	const refreshToken = req.user.refreshToken;
 	res.status(200).send(
 		authUtil.successTrue(200, '구글로그인 성공', {
