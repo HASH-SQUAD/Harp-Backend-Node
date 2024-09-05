@@ -1,7 +1,7 @@
 const passport = require('passport');
-const {Users} = require('../../models');
+const { Users } = require('../../models');
 const KakaoStrategy = require('passport-kakao').Strategy;
-const {generateRefreshToken} = require('../../tokens/jwt');
+const { generateRefreshToken } = require('../../tokens/jwt');
 
 passport.use(
   new KakaoStrategy(
@@ -14,7 +14,7 @@ passport.use(
     async (request, accessToken, refreshToken, profile, done) => {
       try {
         const user = await Users.findOne({
-          where: {email: profile._json.kakao_account.email},
+          where: { email: profile._json.kakao_account.email },
         });
 
         if (!user) {
@@ -24,6 +24,7 @@ passport.use(
             name: profile._json.kakao_account.profile.nickname,
             profileImg: profile._json.kakao_account.profile.thumbnail_image_url,
             newAccount: true,
+            authority: false,
             provider: 'kakao',
           };
           if (!profileData.email) {
@@ -43,7 +44,7 @@ passport.use(
           const newRefreshToken = generateRefreshToken(
             profile._json.kakao_account.email
           );
-          await user.update({refreshToken: newRefreshToken});
+          await user.update({ refreshToken: newRefreshToken });
           return done(null, user);
         }
       } catch (err) {
