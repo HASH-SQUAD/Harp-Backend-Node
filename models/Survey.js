@@ -9,28 +9,28 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			question1: {
 				type: DataTypes.TEXT,
-				get: function() {
+				get: function () {
 					try {
 						return JSON.parse(this.getDataValue('question1'));
 					} catch (error) {
 						return this.getDataValue('question1');
 					}
 				},
-				set: function(value) {
+				set: function (value) {
 					this.setDataValue('question1', JSON.stringify(value));
 				},
 				allowNull: true,
 			},
 			question2: {
 				type: DataTypes.TEXT,
-				get: function() {
+				get: function () {
 					try {
 						return JSON.parse(this.getDataValue('question2'));
 					} catch (error) {
 						return this.getDataValue('question2');
 					}
 				},
-				set: function(value) {
+				set: function (value) {
 					this.setDataValue('question2', JSON.stringify(value));
 				},
 				allowNull: true,
@@ -39,9 +39,18 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.TEXT,
 				allowNull: true,
 			},
+			userId: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+				references: {
+					model: 'Users',
+					key: 'userId',
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE',
+			},
 		},
 		{
-			paranoid: false,
 			charset: 'utf8',
 			collate: 'utf8_general_ci',
 		}

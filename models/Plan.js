@@ -25,21 +25,27 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			data: {
 				type: DataTypes.TEXT,
-				get: function() {
+				get: function () {
 					try {
 						return JSON.parse(this.getDataValue('data'));
 					} catch (error) {
 						return this.getDataValue('data');
 					}
 				},
-				set: function(value) {
+				set: function (value) {
 					this.setDataValue('data', JSON.stringify(value));
 				},
 				allowNull: true,
 			},
 			userId: {
-				type: DataTypes.STRING,
+				type: DataTypes.INTEGER,
 				allowNull: false,
+				references: {
+					model: 'Users',
+					key: 'userId',
+				},
+				onDelete: 'CASCADE',
+				onUpdate: 'CASCADE',
 			},
 		},
 		{

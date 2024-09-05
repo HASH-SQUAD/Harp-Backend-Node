@@ -3,8 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     'Users',
     {
       userId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: true,
         primaryKey: true,
+        autoIncrement: true,
+      },
+      authId: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       email: {
@@ -55,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Users.associate = models => {
-    Users.hasMany(models.Survey, {foreignKey: 'userId', sourceKey: 'userId'});
-    Users.hasMany(models.Plan, {foreignKey: 'userId', sourceKey: 'userId'});
+    Users.hasMany(models.Survey, { foreignKey: 'userId', sourceKey: 'userId' });
+    Users.hasMany(models.Plan, { foreignKey: 'userId', sourceKey: 'userId' });
   };
 
   return Users;
