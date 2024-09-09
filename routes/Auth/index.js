@@ -7,12 +7,13 @@ router.use('/google', GoogleRouter);
 const KakaoRouter = require('./KakaoAuth');
 router.use('/kakao', KakaoRouter);
 
-// 새로운 유저생성
+// 새로운 유저생성 라우터
 const NewAccountSignUpRouter = require('./NewAccountSignUp')
 router.use('/newaccount', NewAccountSignUpRouter)
 
-// 유저정보수정
-
+// 유저정보수정 라우터
+const UpdateUserRouter = require('./UpdateUser');
+router.use('/updateuser', UpdateUserRouter);
 
 // 설문조사 라우터
 const SurveyRouter = require('./Survey');
