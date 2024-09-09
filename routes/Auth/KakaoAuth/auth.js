@@ -1,7 +1,7 @@
 const passport = require('passport');
-const { Users } = require('../../models');
+const { Users } = require('../../../models');
 const KakaoStrategy = require('passport-kakao').Strategy;
-const { generateRefreshToken } = require('../../tokens/jwt');
+const { generateRefreshToken } = require('../../../tokens/jwt');
 
 passport.use(
   new KakaoStrategy(

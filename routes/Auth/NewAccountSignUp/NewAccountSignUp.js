@@ -1,5 +1,5 @@
-const authUtil = require('../../response/authUtil');
-const { Users } = require('../../models');
+const authUtil = require('../../../response/authUtil');
+const { Users } = require('../../../models');
 
 const NewAccount = async (req, res) => {
   const { nickname, birthdate, gender } = req.body;
