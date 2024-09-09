@@ -1,5 +1,5 @@
-const authUtil = require('../../response/authUtil.js');
-const { Survey } = require('../../models');
+const authUtil = require('../../../response/authUtil.js');
+const { Survey } = require('../../../models');
 const { where } = require('sequelize');
 
 const CreateSurvey = async (req, res) => {
