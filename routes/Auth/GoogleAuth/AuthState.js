@@ -1,4 +1,4 @@
-const authUtil = require("../../response/authUtil");
+const authUtil = require("../../../response/authUtil");
 
 const AuthState = (req, res) => {
   return res.status(201).send(

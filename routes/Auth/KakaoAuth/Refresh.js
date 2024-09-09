@@ -1,5 +1,5 @@
-const { verifyToken, generateAccessToken } = require('../../tokens/jwt');
-const authUtil = require('../../response/authUtil');
+const { verifyToken, generateAccessToken } = require('../../../tokens/jwt');
+const authUtil = require('../../../response/authUtil');
 
 const Refresh = (req, res) => {
 	const refreshToken = req.body.refreshToken;
