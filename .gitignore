@@ -1,3 +1,7 @@
 node_modules
 .env
-./public/image
+.deploy.env
+.DS_Store
+logs
+
+public/image
