@@ -11,7 +11,7 @@ const NewAccount = async (req, res) => {
       where: { userId: req.user.dataValues.userId },
     });
 
-    if (!user.newAccount) {
+    if (!user.newAccount == false) {
       return res
         .status(403)
         .send(

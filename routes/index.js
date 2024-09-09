@@ -15,12 +15,12 @@ router.use('/jwt', jwtRouter);
 const NewAccountSignUpRouter = require('./NewAccountSignUp')
 router.use('/newaccount', NewAccountSignUpRouter)
 
+// 설문조사 라우터
+const SurveyRouter = require('./Survey');
+router.use('/survey', SurveyRouter);
+
 // 채팅 라우터
 const ChattingRouter = require('./Chatting');
 router.use('/chat', ChattingRouter);
-
-// 채팅 라우터
-const SurveyRouter = require('./Survey');
-router.use('/chat', SurveyRouter);
 
 module.exports = router;
