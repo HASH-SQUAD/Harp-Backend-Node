@@ -1,27 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-// 간편로그인 라우터
-const GoogleRouter = require('./Auth/GoogleAuth');
-router.use('/auth', GoogleRouter);
-const KakaoRouter = require('./Auth/KakaoAuth');
-router.use('/auth', KakaoRouter);
+// 유저 관련 라우터
+const userRouter = require('./Auth')
+router.use('/auth', userRouter)
 
 // JWT 인증 라우터
 const jwtRouter = require('./Jwt');
 router.use('/jwt', jwtRouter);
 
-// 새계정 생성 라우터
-const NewAccountSignUpRouter = require('./Auth/NewAccountSignUp')
-router.use('/newaccount', NewAccountSignUpRouter)
-
 // 이미지 업로드 라우터
 const uploadRouter = require('./Upload');
 router.use('/upload', uploadRouter);
-
-// 설문조사 라우터
-const SurveyRouter = require('./Survey');
-router.use('/survey', SurveyRouter);
 
 // 채팅 라우터
 const ChattingRouter = require('./Chatting');
