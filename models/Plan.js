@@ -24,17 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: true,
 			},
 			data: {
-				type: DataTypes.TEXT,
-				get: function () {
-					try {
-						return JSON.parse(this.getDataValue('data'));
-					} catch (error) {
-						return this.getDataValue('data');
-					}
-				},
-				set: function (value) {
-					this.setDataValue('data', JSON.stringify(value));
-				},
+				type: DataTypes.JSON,
 				allowNull: true,
 			},
 			userId: {
