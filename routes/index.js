@@ -15,6 +15,10 @@ router.use('/jwt', jwtRouter);
 const NewAccountSignUpRouter = require('./NewAccountSignUp')
 router.use('/newaccount', NewAccountSignUpRouter)
 
+// 이미지 업로드 라우터
+const uploadRouter = require('./Upload');
+router.use('/upload', uploadRouter);
+
 // 설문조사 라우터
 const SurveyRouter = require('./Survey');
 router.use('/survey', SurveyRouter);
