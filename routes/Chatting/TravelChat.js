@@ -1,11 +1,11 @@
 const axios = require('axios');
-const systemData = require('./system/system.js');
+const systemData = require('./system/TravelData.js');
 const fs = require('fs');
 const path = require('path');
 const authUtil = require('../../response/authUtil.js');
 const { AI } = require('../../models');
 
-const conversationPath = path.join(__dirname, './system/conversation.json');
+const conversationPath = path.join(__dirname, './system/TravelData.json');
 
 const RequestChat = async (req, res) => {
 	const { previousConversation, location } = req.body;
@@ -18,12 +18,32 @@ const RequestChat = async (req, res) => {
 		if (!aiRecord || aiRecord.dataValues.userId !== userId) {
 			return res.status(403).send(authUtil.successFalse(403, '사용자 권한이 없습니다.'));
 		}
-		
+
 		const previousConversations = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
 
 		const systemMessageExists = previousConversations.messages.some(
 			message => message.role === 'system'
 		);
+
+		let location_Cafe_Response = {}
+		let location_Food_Response = {}
+
+		if (location) {
+			location_Cafe_Response = await axios({
+				method: 'GET',
+				url: `https://dapi.kakao.com/v2/local/search/keyword?query=${location}&page=1&size=10&category_group_code=FD6`,
+				headers: {
+					'Authorization': `KakaoAK ${process.env.KAKAO_CLIENT_ID}`
+				}
+			});
+			location_Food_Response = await axios({
+				method: 'GET',
+				url: `https://dapi.kakao.com/v2/local/search/keyword?query=${location}&page=1&size=10&category_group_code=CE7`,
+				headers: {
+					'Authorization': `KakaoAK ${process.env.KAKAO_CLIENT_ID}`
+				}
+			});
+		}
 
 		if (!systemMessageExists) {
 			previousConversations.messages.unshift({
@@ -31,7 +51,11 @@ const RequestChat = async (req, res) => {
 				content: [
 					{
 						type: 'text',
-						text: systemData
+						text: `
+							${location_Cafe_Response.data}
+							${location_Food_Response.data}
+							${systemData}
+						`
 					}
 				]
 			});

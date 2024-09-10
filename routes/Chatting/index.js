@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { validateToken } = require('../../middlewares/AuthMiddleware.js');
 
-const requestChat = require('../Chatting/RequestChat.js');
+const requestChat = require('../Chatting/TravelChat.js');
 router.post('/request/:id', validateToken, requestChat);
 
 const createAI = require('../Chatting/AI.js');
