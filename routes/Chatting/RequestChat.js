@@ -13,7 +13,12 @@ const RequestChat = async (req, res) => {
 	const aiId = req.params.id;
 
 	try {
+		const aiRecord = await AI.findOne({ where: { aiId: aiId } });
 
+		if (!aiRecord || aiRecord.dataValues.userId !== userId) {
+			return res.status(403).send(authUtil.successFalse(403, '사용자 권한이 없습니다.'));
+		}
+		
 		const previousConversations = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
 
 		const systemMessageExists = previousConversations.messages.some(
