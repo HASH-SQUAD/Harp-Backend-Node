@@ -7,7 +7,7 @@ const { AI } = require('../../models');
 
 const conversationPath = path.join(__dirname, './system/TravelData.json');
 
-const RequestChat = async (req, res) => {
+const TravelChat = async (req, res) => {
 	const { previousConversation, location } = req.body;
 	const userId = req.user.dataValues.userId;
 	const aiId = req.params.id;
@@ -121,4 +121,4 @@ const RequestChat = async (req, res) => {
 	}
 };
 
-module.exports = RequestChat;
+module.exports = TravelChat;
