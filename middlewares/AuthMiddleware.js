@@ -16,8 +16,8 @@ const validateToken = async (req, res, next) => {
 		return res.status(401).json(authUtil.successFalse(401, '유효하지 않은 토큰입니다.'));
 	}
 
-	const userId = decoded.id;
-	const user = await Users.findOne({ where: { "id": userId } });
+	const email = decoded.email;
+	const user = await Users.findOne({ where: { email: email } });
 
 	if (!user) {
 		return res.status(401).send(authUtil.successFalse(401, '존재하지 않는 유저입니다.'));

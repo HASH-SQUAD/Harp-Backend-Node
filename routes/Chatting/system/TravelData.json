@@ -1,0 +1,130 @@
+{
+	"messages": [
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "일정짜줘"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "{\n    subject: 'travel',\n    category: 'question1',\n    question: '어떤 곳을 가고싶으신가요?'\n    select: []\n}"
+				}
+			]
+		},
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "서면"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "{\n    subject: 'travel',\n    category: 'question2',\n    question: '며칠동안 여행을 떠나시나요?'\n    select: []\n}"
+				}
+			]
+		},
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "1박2일"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "{\n    subject: 'travel',\n    category: 'question3',\n    question: '몇명에서 여행을 떠나시나요?'\n    select: []\n}"
+				}
+			]
+		},
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "3명"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "{\n    subject: 'travel',\n    category: 'question4',\n    question: '어떤 여행 분위기를 원하시나요?',\n    select: ['커플여행', '가족여행', '우정여행']\n}"
+				}
+			]
+		},
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "가족여행"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "{\n    subject: 'travel',\n    category: 'question5',\n    question: '어떤 숙소 유형을 원하시나요?',\n    select: ['리조트', '호텔', '펜션', '게스트 하우스', '캠핑', '글램핑']\n}"
+				}
+			]
+		},
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "펜션"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "{\n    subject: 'travel',\n    category: 'question6',\n    question: '어떤 교통수단을 원하시나요?',\n    select: ['자차', '렌트카', '대중교통']\n}"
+				}
+			]
+		},
+		{
+			"role": "user",
+			"content": [
+				{
+					"type": "text",
+					"text": "대중교통"
+				}
+			]
+		},
+		{
+			"role": "assistant",
+			"content": [
+				{
+					"type": "text",
+					"text": "[\n  \"day1\": [\n    {\n      \"time\": \"10:00\",\n      \"activity\": \"어촌체험하기\",\n      \"location\": \"부산 부산진구 어촌로 7\",\n      \"recommendation\": \"한국 전통 어촌문화를 경험할 수 있는 어촌체험마을입니다. 가족 모두가 즐길 수 있는 다양한 활동들이 있답니다.\",\n      \"storeName\": \"부산 어촌체험마을\",\n      \"place_url\": \"http://place.map.kakao.com/11191310\"\n    },\n    {\n      \"time\": \"12:00\",\n      \"activity\": \"점심먹기\",\n      \"location\": \"부산 부산진구 서면로30번길 19\",\n      \"recommendation\": \"맛있는 고기 요리를 즐길 수 있는 인생청돈입니다. 가족과 함께 활기찬 점심시간을 보낼 수 있습니다.\",\n      \"storeName\": \"청자골 인생청돈\",\n      \"place_url\": \"http://place.map.kakao.com/893282225\"\n    },\n    {\n      \"time\": \"14:00\",\n      \"activity\": \"스포츠경기 구경하기\",\n      \"location\": \"부산 부산진구 시민공원선수촌2길 55\",\n      \"recommendation\": \"오랜 역사와 함께하는 스포츠 경기를 관람할 수 있는 아시아드경기장입니다.\",\n      \"storeName\": \"아시아드게임장\",\n      \"place_url\": \"http://place.map.kakao.com/10466306\"\n    },\n    {\n      \"time\": \"17:00\",\n      \"activity\": \"저녁먹기\",\n      \"location\": \"부산 부산진구 서면화장동로9번길 15\",\n      \"recommendation\": \"부산 명물인 착한 준칙 갈비전문점인 양정종가집입니다. 맛있는 갈비 요리를 즐길 수 있어요.\",\n      \"storeName\": \"양정종가집 본점\",\n      \"place_url\": \"http://place.map.kakao.com/85528546\"\n    }\n  ],\n  \"day2\": [\n    {\n      \"time\": \"09:00\",\n      \"activity\": \"시민공원 즐기기\",\n      \"location\": \"\",\n      \"recommendation\": \"쾌적한 자연 속에서 가족과 함께 산책하며 휴식을 즐길 수 있는 부산 시민공원입니다.\",\n      \"storeName\": \"부산시민공원\",\n      \"place_url\": \"http://place.map.kakao.com/489392978\"\n    },\n    {\n      \"time\": \"12:00\",\n      \"activity\": \"점심먹기\",\n      \"location\": \"부산 부산진구 충사로109번길 106\",\n      \"recommendation\": \"신선한 해산물을 맛볼 수 있는 별내랑어 집입니다. 가족과 함께 식사를 즐길 수 있습니다.\",\n      \"storeName\": \"별내랑어 집\",\n      \"place_url\": \"http://place.map.kakao.com/16094440\"\n    }\n  ],\n  \"tips\": [\n    \"부산 즐길거리: 해운대 해수욕장, 광안리 해변, 태종대, 영화의 전당 등\",\n    \"가족끼리 추억을 만들 수 있는 요동치즈 파전거리, 광안대교 오륙도스카이워크\"\n  ]\n]"
+				}
+			]
+		}
+	]
+}

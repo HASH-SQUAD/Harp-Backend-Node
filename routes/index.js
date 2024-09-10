@@ -1,10 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-const GoogleRouter = require('./GoogleAuth');
-router.use('/auth', GoogleRouter);
+// 유저 관련 라우터
+const userRouter = require('./Auth')
+router.use('/auth', userRouter)
 
-const KakaoRouter = require('./KakaoAuth')
-router.use('/auth', KakaoRouter)
+// JWT 인증 라우터
+const jwtRouter = require('./Jwt');
+router.use('/jwt', jwtRouter);
+
+// 이미지 업로드 라우터
+const uploadRouter = require('./Upload');
+router.use('/upload', uploadRouter);
+
+// 채팅 라우터
+const ChattingRouter = require('./Chatting');
+router.use('/chat', ChattingRouter);
 
 module.exports = router;
