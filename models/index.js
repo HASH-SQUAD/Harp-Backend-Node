@@ -18,7 +18,12 @@ if (config.use_env_variable) {
 		dialect: config.dialect,
 		timezone: '+09:00',
 		port: config.port,
-		logging: false
+		logging: false,
+		dialectOptions: {
+			options: {
+				requestTimeout: 3000
+			}
+		}
 	});
 }
 
