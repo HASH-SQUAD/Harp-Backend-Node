@@ -14,9 +14,9 @@ const PORT = process.env.PORT;
 //DataBase
 const db = require('./models');
 
-//API Test
+//Server Test
 app.get('/', (req, res) => {
-    res.send('API Running');
+    res.send(`HARP Server is Running Port ${process.env.PORT}`);
 });
 
 //API Router Call
