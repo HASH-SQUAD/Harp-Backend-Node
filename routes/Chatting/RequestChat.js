@@ -3,14 +3,17 @@ const systemData = require('./system/system.js');
 const fs = require('fs');
 const path = require('path');
 const authUtil = require('../../response/authUtil.js');
+const { AI } = require('../../models');
 
 const conversationPath = path.join(__dirname, './system/conversation.json');
 
 const RequestChat = async (req, res) => {
 	const { previousConversation, location } = req.body;
 	const userId = req.user.dataValues.userId;
+	const aiId = req.params.id;
 
 	try {
+
 		const previousConversations = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
 
 		const systemMessageExists = previousConversations.messages.some(
@@ -58,6 +61,21 @@ const RequestChat = async (req, res) => {
 		});
 
 		const contents = response.data.choices[0].message.content;
+
+		previousConversations.messages.push(
+			{
+				"role": "assistant",
+				"content": [
+					{
+						"type": "text",
+						"text": contents
+					}
+				]
+			}
+		);
+
+		// 대화 내용을 데이터베이스에 업데이트
+		await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
 
 		res.status(200).send(authUtil.successTrue(200, '성공', { Contents: contents }));
 
