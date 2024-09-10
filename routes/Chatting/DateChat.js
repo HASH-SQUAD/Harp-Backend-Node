@@ -79,7 +79,6 @@ const DateChat = async (req, res) => {
       content: previousConversation
     });
 
-    console.log('Updated Conversations after user message:', previousConversations.messages);
 
     const response = await axios({
       method: 'POST',
@@ -99,11 +98,19 @@ const DateChat = async (req, res) => {
       }
     });
 
-    const contents = JSON.parse(response.data.choices[0].message.content);
+    const responseContent = response.data.choices[0].message.content;
+
+    let contents;
+
+    try {
+      contents = JSON.parse(responseContent);
+    } catch (e) {
+      contents = responseContent;
+    }
 
     previousConversations.messages.push({
       role: 'assistant',
-      content: JSON.stringify(contents)
+      content: typeof contents === 'string' ? contents : JSON.stringify(contents)
     });
 
     await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
