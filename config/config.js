@@ -17,6 +17,7 @@ module.exports = {
 		host: process.env.DB_POST,
 		port: process.env.DB_PORT,
 		dialect: 'mysql',
+		logging: false
 	},
 	production: {
 		username: process.env.DB_ID,
@@ -25,5 +26,6 @@ module.exports = {
 		host: process.env.DB_POST,
 		port: process.env.DB_PORT,
 		dialect: 'mysql',
+		logging: false
 	},
 };
