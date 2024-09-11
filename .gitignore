@@ -2,6 +2,10 @@ node_modules
 .env
 .deploy.env
 .DS_Store
-logs
+logs/error/*.json
+logs/error/*.error.log
+logs/info/*.json
+logs/info/*.log
+
 
 public/image
