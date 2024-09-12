@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     logger.info(`Request received`, { ip: ipAddress, path: requestPath, method: method });
     next();
 });
-  
+
 // Port Setting
 const PORT = process.env.PORT;
 
