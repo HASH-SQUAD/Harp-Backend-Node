@@ -1,7 +1,7 @@
 const { RecommendPlan, Users } = require('../../models');
 const authUtil = require('../../response/authUtil.js');
 
-const CreatePlan = async (req, res) => {
+const CreateRecommendPlan = async (req, res) => {
   const { mainImg, title, data } = req.body;
   const userId = req.user.dataValues.userId
 
@@ -9,8 +9,6 @@ const CreatePlan = async (req, res) => {
     const user = await Users.findOne({
       where: { userId: userId },
     });
-
-    console.log(user.dataValues.authority);
 
     if (user.dataValues.authority === 'user') {
       return res
@@ -37,4 +35,4 @@ const CreatePlan = async (req, res) => {
 
 }
 
-module.exports = CreatePlan;
+module.exports = CreateRecommendPlan;

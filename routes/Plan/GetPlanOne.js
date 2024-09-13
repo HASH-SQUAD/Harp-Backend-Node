@@ -1,14 +1,12 @@
 const { Plan } = require('../../models');
 const authUtil = require('../../response/authUtil.js');
 
-const CreatePlan = async (req, res) => {
+const CreatePlanOne = async (req, res) => {
   const userId = req.user.dataValues.userId;
   const planId = req.params.id;
 
   try {
     let PlanData = await Plan.findOne({ where: { planId: planId } });
-
-    console.log(PlanData.dataValues.userId === userId);
 
     if (!PlanData) {
       return res
@@ -34,4 +32,4 @@ const CreatePlan = async (req, res) => {
   }
 }
 
-module.exports = CreatePlan;
+module.exports = CreatePlanOne;

@@ -1,7 +1,7 @@
 const { Plan } = require('../../models');
 const authUtil = require('../../response/authUtil.js');
 
-const CreatePlan = async (req, res) => {
+const GetPlanAll = async (req, res) => {
   const userId = req.user.dataValues.userId;
 
   try {
@@ -25,4 +25,4 @@ const CreatePlan = async (req, res) => {
   }
 }
 
-module.exports = CreatePlan;
+module.exports = GetPlanAll;

@@ -1,7 +1,7 @@
 const authUtil = require('../../../response/authUtil');
 const { Users } = require('../../../models');
 
-const UpdateUser = async (req, res) => {
+const AddAdmin = async (req, res) => {
   const { email } = req.body;
   const userId = req.user.dataValues.userId
 
@@ -41,4 +41,4 @@ const UpdateUser = async (req, res) => {
   }
 };
 
-module.exports = UpdateUser;
+module.exports = AddAdmin;
