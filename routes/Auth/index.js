@@ -19,6 +19,9 @@ router.use('/updateuser', UpdateUserRouter);
 const SurveyRouter = require('./Survey');
 router.use('/survey', SurveyRouter);
 
+// 어드민 권한 라우터
+const AdminRouter = require('./Admin');
+router.use('/admin', AdminRouter);
 
 
 module.exports = router;
