@@ -8,8 +8,6 @@ const GetRecommendPlan = async (req, res) => {
       limit: 5
     });
 
-    console.log(PlanData);
-
     if (!PlanData || PlanData.length === 0) {
       return res
         .status(404)
