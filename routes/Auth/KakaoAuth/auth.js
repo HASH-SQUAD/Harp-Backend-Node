@@ -24,7 +24,7 @@ passport.use(
             name: profile._json.kakao_account.profile.nickname,
             profileImg: profile._json.kakao_account.profile.thumbnail_image_url,
             newAccount: true,
-            authority: false,
+            authority: 'user',
             provider: 'kakao',
           };
           if (!profileData.email) {

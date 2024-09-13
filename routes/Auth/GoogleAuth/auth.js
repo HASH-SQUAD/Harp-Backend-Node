@@ -24,7 +24,7 @@ passport.use(
             name: profile.displayName,
             profileImg: profile.photos[0].value,
             newAccount: true,
-            authority: false,
+            authority: 'user',
             provider: 'google'
           };
 

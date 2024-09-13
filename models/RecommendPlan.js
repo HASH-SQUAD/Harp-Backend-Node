@@ -1,17 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
   const Plan = sequelize.define(
-    'AI',
+    'RecommendPlan',
     {
-      aiId: {
+      RecommendPlanId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      conversation: {
-        type: DataTypes.JSON,
+      mainImg: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
-      locationData: {
+      title: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      data: {
         type: DataTypes.JSON,
         allowNull: true,
       },

@@ -17,4 +17,8 @@ router.use('/upload', uploadRouter);
 const ChattingRouter = require('./Chatting');
 router.use('/chat', ChattingRouter);
 
+// 일정 라우터
+const PlanRouter = require('./Plan')
+router.use('/plan', PlanRouter)
+
 module.exports = router;
