@@ -7,8 +7,6 @@ const CreatePlan = async (req, res) => {
   try {
     let PlanData = await Plan.findAll({ where: { userId: userId } });
 
-    console.log(PlanData);
-
     if (PlanData) {
       return res
         .status(200)
