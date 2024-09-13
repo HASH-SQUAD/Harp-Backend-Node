@@ -12,4 +12,7 @@ router.get('/', validateToken, GetPlanAll)
 const GetPlanOne = require('./GetPlanOne.js')
 router.get('/:id', validateToken, GetPlanOne)
 
+const CreateRecommendPlan = require('./CreateRecommendPlan.js')
+router.post('/recommend', validateToken, CreateRecommendPlan)
+
 module.exports = router;
