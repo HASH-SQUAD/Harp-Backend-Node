@@ -17,7 +17,7 @@ const Login = require('./Login.js');
 router.get('/kakao', Login);
 
 const Callback = require('./Callback.js');
-router.get('/google/callback', Callback, async (req, res) => {
+router.get('/kakao/callback', Callback, async (req, res) => {
 	try {
 		const accessToken = generateAccessToken(req.user.dataValues.email);
 		const refreshToken = req.user.refreshToken;
