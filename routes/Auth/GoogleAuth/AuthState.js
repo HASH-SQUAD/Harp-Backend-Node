@@ -6,7 +6,7 @@ const AuthState = (req, res) => {
       nickname: req.user?.name,
       email: req.user?.email,
       profileImg: req.user?.profileImg,
-      profileImg: req.user?.newAccount
+      newAccount: req.user?.newAccount
     } ))
 };
 
