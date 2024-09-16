@@ -1,7 +1,7 @@
 const passport = require('passport');
-const {Users} = require('../../../models');
+const { Users } = require('../../../models');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
-const {generateRefreshToken} = require('../../../tokens/jwt');
+const { generateRefreshToken } = require('../../../tokens/jwt');
 
 passport.use(
   new GoogleStrategy(
@@ -14,7 +14,7 @@ passport.use(
     async (request, accessToken, refreshToken, profile, done) => {
       try {
         let user = await Users.findOne({
-          where: {email: profile.emails[0].value},
+          where: { email: profile.emails[0].value },
         });
 
         if (!user) {
@@ -40,7 +40,7 @@ passport.use(
           });
         } else {
           const newRefreshToken = generateRefreshToken(profile.emails[0].value);
-          await user.update({refreshToken: newRefreshToken});
+          await user.update({ refreshToken: newRefreshToken });
         }
 
         return done(null, user);
