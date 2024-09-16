@@ -17,15 +17,16 @@ const Login = require('./Login.js');
 router.get('/kakao', Login);
 
 const Callback = require('./Callback.js');
-router.get('/kakao/callback', Callback, (req, res) => {
-	const accessToken = generateAccessToken(req.user.dataValues.email);
-	const refreshToken = req.user.refreshToken;
-	res.status(200).send(
-		authUtil.successTrue(200, '카카오로그인 성공', {
-			accessToken: accessToken,
-			refreshToken: refreshToken,
-		})
-	);
+router.get('/google/callback', Callback, async (req, res) => {
+	try {
+		const accessToken = generateAccessToken(req.user.dataValues.email);
+		const refreshToken = req.user.refreshToken;
+
+		res.redirect(`${process.env.CLIENT_ORIGIN}/auth/google/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+	} catch (error) {
+		console.error('Error during callback processing:', error);
+		res.redirect(`${process.env.CLIENT_ORIGIN}/login`);
+	}
 });
 
 const Fail = require('./Fail.js');
