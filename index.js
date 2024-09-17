@@ -3,11 +3,12 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const path = require('path');
-const authUtil = require('./response/authUtil');
+const cors = require('cors')
 const logger = require('./logger');
 const requestIp = require('request-ip');
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname + '/public')));
 
