@@ -1,10 +1,10 @@
 const axios = require('axios');
-const systemData = require('./system/TravelData.js');
 const fs = require('fs');
 const path = require('path');
 const authUtil = require('../../response/authUtil.js');
 const { AI } = require('../../models');
 
+// JSON 파일 경로 설정
 const conversationPath = path.join(__dirname, './system/TravelData.json');
 
 const TravelChat = async (req, res) => {
@@ -19,6 +19,7 @@ const TravelChat = async (req, res) => {
 			return res.status(403).send(authUtil.successFalse(403, '사용자 권한이 없습니다.'));
 		}
 
+		// 기존 대화 내용 JSON 파일에서 불러오기
 		const Conversation = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
 
 		let previousConversations = aiRecord.dataValues.conversation || { ...Conversation, messages: [] };
@@ -59,17 +60,18 @@ const TravelChat = async (req, res) => {
 			const systemMessage = previousConversations.messages[systemMessageIndex];
 
 			const updatedContent = `
-      카페&음식점 정보: ${JSON.stringify(location_Response)}
+        카페&음식점 정보: ${JSON.stringify(location_Response)}
         ${systemMessage.content}
       `;
 
 			previousConversations.messages[systemMessageIndex].content = updatedContent;
 		} else {
+			// JSON 데이터를 사용하여 시스템 메시지 추가
 			previousConversations.messages.unshift({
 				role: 'system',
 				content: `
           카페&음식점 정보: ${JSON.stringify(location_Response)}
-          시스템 데이터: ${systemData}
+          시스템 데이터: ${JSON.stringify(Conversation, null, 2)}
         `
 			});
 		}
@@ -78,8 +80,6 @@ const TravelChat = async (req, res) => {
 			role: 'user',
 			content: previousConversation
 		});
-
-		// console.log('Updated Conversations after user message:', previousConversations.messages);
 
 		const response = await axios({
 			method: 'POST',
@@ -109,14 +109,18 @@ const TravelChat = async (req, res) => {
 			contents = responseContent;
 		}
 
+		previousConversations.messages.push({
+			role: 'assistant',
+			content: typeof contents === 'string' ? contents : JSON.stringify(contents, null, 2)
+		});
+
 		await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
 
-		res.status(200).send(authUtil.successTrue(200, '성공', {
-			Contents: {
-				role: 'assistant',
-				contents
-			}
-		}));
+		if (typeof contents === 'object') {
+			res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+		} else {
+			res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+		}
 
 	} catch (error) {
 		console.error('RequestChat 에러:', error);
