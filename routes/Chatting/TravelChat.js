@@ -111,7 +111,12 @@ const TravelChat = async (req, res) => {
 
 		await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
 
-		res.status(200).send(authUtil.successTrue(200, '성공', { Contents: contents }));
+		res.status(200).send(authUtil.successTrue(200, '성공', {
+			Contents: {
+				role: 'assistant',
+				contents
+			}
+		}));
 
 	} catch (error) {
 		console.error('RequestChat 에러:', error);
