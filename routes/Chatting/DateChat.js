@@ -4,27 +4,27 @@ const path = require('path');
 const authUtil = require('../../response/authUtil.js');
 const { AI } = require('../../models');
 
-// JSON 파일 경로 설정
 const conversationPath = path.join(__dirname, './system/DateData.json');
 
-// DateChat 함수 정의
 const DateChat = async (req, res) => {
   const { previousConversation, location } = req.body;
   const userId = req.user.dataValues.userId;
   const aiId = req.params.id;
 
   try {
-    // AI 기록 조회
     let aiRecord = await AI.findOne({ where: { aiId: aiId } });
 
     if (!aiRecord || aiRecord.dataValues.userId !== userId) {
       return res.status(403).send(authUtil.successFalse(403, '사용자 권한이 없습니다.'));
     }
 
-    // 기존 대화 내용 JSON 파일에서 불러오기
     const Conversation = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
 
     let previousConversations = aiRecord.dataValues.conversation || { ...Conversation, messages: [] };
+
+    const systemMessageExists = previousConversations.messages.some(
+      message => message.role === 'system'
+    );
 
     let location_Response = {};
 
@@ -48,6 +48,29 @@ const DateChat = async (req, res) => {
         cafe: cafeResponse.data,
         food: foodResponse.data
       };
+    }
+
+    const systemMessageIndex = previousConversations.messages.findIndex(
+      message => message.role === 'system'
+    );
+
+    if (systemMessageIndex !== -1) {
+      const systemMessage = previousConversations.messages[systemMessageIndex];
+
+      const updatedContent = `
+        카페&음식점 정보: ${JSON.stringify(location_Response)}
+        ${systemMessage.content}
+      `;
+
+      previousConversations.messages[systemMessageIndex].content = updatedContent;
+    } else {
+      previousConversations.messages.unshift({
+        role: 'system',
+        content: `
+          카페&음식점 정보: ${JSON.stringify(location_Response)}
+          시스템 데이터: ${JSON.stringify(Conversation, null, 2)}
+        `
+      });
     }
 
     previousConversations.messages.push({
@@ -75,10 +98,10 @@ const DateChat = async (req, res) => {
 
     const responseContent = response.data.choices[0].message.content;
 
-    // JSON으로 변환 가능한지 확인
     let contents;
+
     try {
-      contents = JSON.parse(responseContent.replace(/\\n/g, '').replace(/\\"/g, '"'));
+      contents = JSON.parse(responseContent);
     } catch (e) {
       contents = responseContent;
     }
