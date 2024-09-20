@@ -4,7 +4,6 @@ const path = require('path');
 const authUtil = require('../../response/authUtil.js');
 const { AI } = require('../../models');
 
-// JSON 파일 경로 설정
 const conversationPath = path.join(__dirname, './system/TravelData.json');
 
 const TravelChat = async (req, res) => {
@@ -19,7 +18,6 @@ const TravelChat = async (req, res) => {
 			return res.status(403).send(authUtil.successFalse(403, '사용자 권한이 없습니다.'));
 		}
 
-		// 기존 대화 내용 JSON 파일에서 불러오기
 		const Conversation = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
 
 		let previousConversations = aiRecord.dataValues.conversation || { ...Conversation, messages: [] };
@@ -66,7 +64,6 @@ const TravelChat = async (req, res) => {
 
 			previousConversations.messages[systemMessageIndex].content = updatedContent;
 		} else {
-			// JSON 데이터를 사용하여 시스템 메시지 추가
 			previousConversations.messages.unshift({
 				role: 'system',
 				content: `
