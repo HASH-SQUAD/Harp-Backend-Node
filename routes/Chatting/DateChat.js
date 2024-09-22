@@ -108,7 +108,7 @@ const DateChat = async (req, res) => {
 
     previousConversations.messages.push({
       role: 'assistant',
-      content: typeof contents === 'string' ? contents : JSON.stringify(contents, null, 2)
+      content: typeof contents === 'object' ? JSON.stringify(contents) : contents
     });
 
     await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });

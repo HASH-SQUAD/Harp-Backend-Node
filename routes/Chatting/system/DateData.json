@@ -94,8 +94,59 @@
 			"role": "assistant",
 			"content": [
 				{
-					"text": "[\n  \"day1\": [\n    {\n      \"time\": \"10:00\",\n      \"activity\": \"어촌체험하기\",\n      \"location\": \"부산 부산진구 어촌로 7\",\n      \"recommendation\": \"한국 전통 어촌문화를 경험할 수 있는 어촌체험마을입니다. 가족 모두가 즐길 수 있는 다양한 활동들이 있답니다.\",\n      \"storeName\": \"부산 어촌체험마을\",\n      \"place_url\": \"http://place.map.kakao.com/11191310\"\n    },\n    {\n      \"time\": \"12:00\",\n      \"activity\": \"점심먹기\",\n      \"location\": \"부산 부산진구 서면로30번길 19\",\n      \"recommendation\": \"맛있는 고기 요리를 즐길 수 있는 인생청돈입니다. 가족과 함께 활기찬 점심시간을 보낼 수 있습니다.\",\n      \"storeName\": \"청자골 인생청돈\",\n      \"place_url\": \"http://place.map.kakao.com/893282225\"\n    },\n    {\n      \"time\": \"14:00\",\n      \"activity\": \"스포츠경기 관람\",\n      \"location\": \"부산 부산진구 시민공원선수촌2길 55\",\n      \"recommendation\": \"오랜 역사와 함께하는 스포츠 경기를 관람할 수 있는 아시아드경기장입니다.\",\n      \"storeName\": \"아시아드게임장\",\n      \"place_url\": \"http://place.map.kakao.com/10466306\"\n    },\n    {\n      \"time\": \"17:00\",\n      \"activity\": \"저녁먹기\",\n      \"location\": \"부산 부산진구 서면화장동로9번길 15\",\n      \"recommendation\": \"부산 명물인 착한 준칙 갈비전문점인 양정종가집입니다. 맛있는 갈비 요리를 즐길 수 있어요.\",\n      \"storeName\": \"양정종가집 본점\",\n      \"place_url\": \"http://place.map.kakao.com/85528546\"\n    }\n  ],\n  \"tips\": [\n    \"부산 즐길거리: 해운대 해수욕장, 광안리 해변, 태종대, 영화의 전당 등\",\n    \"금정산도 갈만한데?\",\n    \"가족끼리 추억을 만들 수 있는 요동치즈 파전거리, 광안대교 오륙도스카이워크\"\n  ]\n]",
-					"type": "text"
+					"text": {
+						"day1": [
+							{
+								"time": "08:00",
+								"activity": "고래사어묵 감천문화마을점에서 아침 식사",
+								"recommendation": "",
+								"location": "부산 사하구 감내2로 159"
+							},
+							{
+								"time": "09:00",
+								"activity": "감천문화마을 방문 및 사진 촬영",
+								"recommendation": "다채로운 벽화와 골목길 감상",
+								"location": "감천문화마을"
+							},
+							{
+								"time": "11:00",
+								"activity": "국제시장에서 쇼핑 및 길거리 음식 즐기기",
+								"recommendation": "다양한 먹거리와 볼거리 체험 가능",
+								"location": "국제시장"
+							},
+							{
+								"time": "13:00",
+								"activity": "자갈치 시장 방문 및 해산물 먹방",
+								"recommendation": "싱싱한 해산물 맛볼 수 있음",
+								"location": "자갈치시장"
+							},
+							{
+								"time": "15:00",
+								"activity": "태종대 공원에서 해안 절경 감상 및 등대 방문",
+								"recommendation": "아름다운 자연 경관 감상 가능",
+								"location": "태종대유원지"
+							},
+							{
+								"time": "17:00",
+								"activity": "광안리 해수욕장에서 해변 산책 및 광안대교 야경 감상",
+								"recommendation": "",
+								"location": "광안리해수욕장"
+							},
+							{
+								"time": "18:00",
+								"activity": "저녁 식사",
+								"recommendation": "디에이블 광안점",
+								"location": "부산 수영구 민락수변로 29 3층"
+							},
+							{
+								"time": "20:00",
+								"activity": "카페 방문",
+								"recommendation": "호박가게에서 분위기 즐기기",
+								"location": "부산 수영구 광남로48번길 21"
+							}
+						]
+					},
+					"type": "json"
 				}
 			]
 		}
