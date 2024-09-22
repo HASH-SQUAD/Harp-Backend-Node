@@ -13,9 +13,14 @@ const CreatePlan = async (req, res) => {
       data,
       userId: req.user.dataValues.userId
     })
+
+    const UserPlanData = await Plan.findOne({
+      order: [['planId', 'DESC']]
+    });
+
     return res
       .status(200)
-      .send(authUtil.successTrue(200, '일정 생성에 성공하였습니다.'));
+      .send(authUtil.successTrue(200, '일정 생성에 성공하였습니다.', UserPlanData));
   } catch (err) {
     console.log(err);
     return res
