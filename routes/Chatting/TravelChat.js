@@ -101,10 +101,10 @@ const TravelChat = async (req, res) => {
 		let contents;
 
 		try {
-			contents = JSON.parse(responseContent);
-		} catch (e) {
-			contents = responseContent;
-		}
+      contents = JSON.parse(responseContent);
+    } catch (e) {
+      contents = responseContent;
+    }
 
 		previousConversations.messages.push({
 			role: 'assistant',
