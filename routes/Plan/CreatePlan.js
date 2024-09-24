@@ -25,7 +25,7 @@ const CreatePlan = async (req, res) => {
     console.log(err);
     return res
       .status(500)
-      .send(authUtil.successFalse(500, '디코딩 중 문제발생 Console 확인바람'));
+      .send(authUtil.successFalse(500, '디코딩 중 문제발생 Console 확인바람'));g
   }
 
 
