@@ -1,7 +1,7 @@
 const authUtil = require('../../response/authUtil');
 const { Plan } = require('../../models');
 
-const UpdateUser = async (req, res) => {
+const UpdatePlan = async (req, res) => {
   const { planName, mainImg, startDate, endDate, data } = req.body;
   const userId = req.user.dataValues.userId
   const planId = req.params.id;
@@ -40,4 +40,4 @@ const UpdateUser = async (req, res) => {
   }
 };
 
-module.exports = UpdateUser;
+module.exports = UpdatePlan;
