@@ -16,12 +16,12 @@ const CreatePlanOne = async (req, res) => {
 
     if (PlanData.dataValues.userId === userId) {
       return res
-        .status(403)
-        .send(authUtil.successTrue(403, '접근권한이 없습니다.'));
-    } else {
-      return res
         .status(200)
         .send(authUtil.successTrue(200, '일정을 찾았습니다.', { PlanData }));
+    } else {
+      return res
+        .status(403)
+        .send(authUtil.successTrue(403, '접근권한이 없습니다.'));
     }
 
   } catch (err) {

@@ -18,15 +18,17 @@ router.get('/google', Login);
 
 const Callback = require('./Callback.js');
 router.get('/google/callback', Callback, async (req, res) => {
-	const accessToken = generateAccessToken(req.user.dataValues.email);
-	const refreshToken = req.user.refreshToken;
-	res.status(200).send(
-		authUtil.successTrue(200, '구글로그인 성공', {
-			accessToken: accessToken,
-			refreshToken: refreshToken,
-		})
-	);
+	try {
+		const accessToken = generateAccessToken(req.user.dataValues.email);
+		const refreshToken = req.user.refreshToken;
+
+		res.redirect(`${process.env.CLIENT_ORIGIN}/auth/google/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+	} catch (error) {
+		console.error('Error during callback processing:', error);
+		res.redirect(`${process.env.CLIENT_ORIGIN}/login`);
+	}
 });
+
 
 const Fail = require('./Fail.js');
 router.get('/google/failure', Fail);

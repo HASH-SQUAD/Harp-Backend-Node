@@ -1,5 +1,4 @@
 const axios = require('axios');
-const systemData = require('./system/TravelData.js');
 const fs = require('fs');
 const path = require('path');
 const authUtil = require('../../response/authUtil.js');
@@ -59,7 +58,7 @@ const TravelChat = async (req, res) => {
 			const systemMessage = previousConversations.messages[systemMessageIndex];
 
 			const updatedContent = `
-      카페&음식점 정보: ${JSON.stringify(location_Response)}
+        카페&음식점 정보: ${JSON.stringify(location_Response)}
         ${systemMessage.content}
       `;
 
@@ -69,7 +68,7 @@ const TravelChat = async (req, res) => {
 				role: 'system',
 				content: `
           카페&음식점 정보: ${JSON.stringify(location_Response)}
-          시스템 데이터: ${systemData}
+          시스템 데이터: ${JSON.stringify(Conversation, null, 2)}
         `
 			});
 		}
@@ -78,8 +77,6 @@ const TravelChat = async (req, res) => {
 			role: 'user',
 			content: previousConversation
 		});
-
-		// console.log('Updated Conversations after user message:', previousConversations.messages);
 
 		const response = await axios({
 			method: 'POST',
@@ -104,14 +101,23 @@ const TravelChat = async (req, res) => {
 		let contents;
 
 		try {
-			contents = JSON.parse(responseContent);
-		} catch (e) {
-			contents = responseContent;
-		}
+      contents = JSON.parse(responseContent);
+    } catch (e) {
+      contents = responseContent;
+    }
+
+		previousConversations.messages.push({
+			role: 'assistant',
+			content: typeof contents === 'string' ? contents : JSON.stringify(contents, null, 2)
+		});
 
 		await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
 
-		res.status(200).send(authUtil.successTrue(200, '성공', { Contents: contents }));
+		if (typeof contents === 'object') {
+			res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+		} else {
+			res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+		}
 
 	} catch (error) {
 		console.error('RequestChat 에러:', error);

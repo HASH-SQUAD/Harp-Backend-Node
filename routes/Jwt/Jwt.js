@@ -7,23 +7,23 @@ const secret = process.env.SECRET_KEY;
 const Jwt = async (req, res) => {
   const { accessToken, refreshToken } = req.body;
 
-    try {
+  try {
     const decoded = verify(accessToken, secret);
-    const userid = decoded.userid;
+    const email = decoded.email;
     const user = await Users.findOne({
       where: {
-        userid,
+        email,
       },
     });
     console.log(user.dataValues.refreshToken);
     if (user.dataValues.refreshToken === refreshToken) {
-      const accessToken = generateAccessToken(user.userid);
+      const accessToken = generateAccessToken(user.email);
       return res
         .status(200)
         .send(
           authUtil.jwtSent(
             200,
-            'accessToken을 재발급 했습니다.',
+            '재발급 했습니다.',
             accessToken,
             refreshToken
           )
