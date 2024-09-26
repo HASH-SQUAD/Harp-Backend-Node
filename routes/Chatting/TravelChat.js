@@ -2,7 +2,8 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const authUtil = require('../../response/authUtil.js');
-const { AI } = require('../../models');
+const { AI, Survey } = require('../../models');
+const { where } = require('sequelize');
 
 const conversationPath = path.join(__dirname, './system/TravelData.json');
 
@@ -50,6 +51,8 @@ const TravelChat = async (req, res) => {
 			};
 		}
 
+		const UserSurveyData = await Survey.findOne({ where: { userId } })
+
 		const systemMessageIndex = previousConversations.messages.findIndex(
 			message => message.role === 'system'
 		);
@@ -59,6 +62,10 @@ const TravelChat = async (req, res) => {
 
 			const updatedContent = `
         카페&음식점 정보: ${JSON.stringify(location_Response)}
+				사용자가 좋아하는 여행 유형: ${UserSurveyData.dataValues.question1}
+				사용자의 음식 취향: ${UserSurveyData.dataValues.question2}
+				사용자의 MBTI: ${UserSurveyData.dataValues.question3}
+				추가적인 사용자의 정보: ${UserSurveyData.dataValues.question3}
         ${systemMessage.content}
       `;
 
@@ -86,7 +93,7 @@ const TravelChat = async (req, res) => {
 				'Content-Type': 'application/json'
 			},
 			data: {
-				model: 'gpt-3.5-turbo-16k',
+				model: "gpt-4o-mini",
 				messages: previousConversations.messages,
 				max_tokens: 8000,
 				temperature: 0.40,
@@ -101,10 +108,10 @@ const TravelChat = async (req, res) => {
 		let contents;
 
 		try {
-      contents = JSON.parse(responseContent);
-    } catch (e) {
-      contents = responseContent;
-    }
+			contents = JSON.parse(responseContent);
+		} catch (e) {
+			contents = responseContent;
+		}
 
 		previousConversations.messages.push({
 			role: 'assistant',
