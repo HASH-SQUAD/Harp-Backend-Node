@@ -76,6 +76,10 @@ const TravelChat = async (req, res) => {
 				content: `
           카페&음식점 정보: ${JSON.stringify(location_Response)}
           시스템 데이터: ${JSON.stringify(Conversation, null, 2)}
+					사용자가 좋아하는 여행 유형: ${UserSurveyData.dataValues.question1}
+					사용자의 음식 취향: ${UserSurveyData.dataValues.question2}
+					사용자의 MBTI: ${UserSurveyData.dataValues.question3}
+					추가적인 사용자의 정보: ${UserSurveyData.dataValues.question3}
         `
 			});
 		}
