@@ -96,7 +96,7 @@ const DateChat = async (req, res) => {
         'Content-Type': 'application/json'
       },
       data: {
-        model: 'gpt-3.5-turbo-16k',
+        model: 'gpt-4o-mini',
         messages: previousConversations.messages,
         max_tokens: 8000,
         temperature: 0.40,
