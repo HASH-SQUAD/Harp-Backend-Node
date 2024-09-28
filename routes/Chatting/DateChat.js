@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const authUtil = require('../../response/authUtil.js');
-const { AI } = require('../../models');
+const { AI, Survey } = require('../../models');
 
 const conversationPath = path.join(__dirname, './system/DateData.json');
 
@@ -116,17 +116,19 @@ const DateChat = async (req, res) => {
       contents = responseContent;
     }
 
+
     previousConversations.messages.push({
       role: 'assistant',
       content: typeof contents === 'object' ? JSON.stringify(contents) : contents
     });
 
+
     await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
 
     if (typeof contents === 'object') {
-      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents.messages[0].content.text }));
     } else {
-      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents.messages[0].content.text }));
     }
 
   } catch (error) {
