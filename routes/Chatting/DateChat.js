@@ -126,9 +126,9 @@ const DateChat = async (req, res) => {
     await AI.update({ conversation: previousConversations }, { where: { aiId: aiId } });
 
     if (typeof contents === 'object') {
-      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents.messages[0].content.text }));
     } else {
-      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents }));
+      res.status(200).json(authUtil.successTrue(200, '성공', { "role": response.data.choices[0].message.role, Contents: contents.messages[0].content.text }));
     }
 
   } catch (error) {
