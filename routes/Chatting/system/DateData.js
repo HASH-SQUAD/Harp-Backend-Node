@@ -16,11 +16,11 @@ const systemData = `
            "select": []
        }
 
-     - 몇 명에서 가는지 묻는 질문:
+     - 몇 명이서 가는지 묻는 질문:
        {
            "subject": "date",
            "category": "question2",
-           "question": "몇명에서 가시나요?",
+           "question": "몇 명이서 가시나요?",
            "select": []
        }
 
@@ -29,7 +29,7 @@ const systemData = `
            "subject": "date",
            "category": "question3",
            "question": "어떤 데이트 분위기를 원하시나요?",
-           "select": ["커플", "가족", "우정"]
+           "select": []
        }
 
      - 원하는 교통수단을 묻는 질문:
@@ -37,7 +37,7 @@ const systemData = `
            "subject": "date",
            "category": "question4",
            "question": "어떤 교통수단을 원하시나요?",
-           "select": ["자차", "렌트카", "대중교통"]
+           "select": ["자차", "대중교통"]
        }
 
 3. 일정 작성

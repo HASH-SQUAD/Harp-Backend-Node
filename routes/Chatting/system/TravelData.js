@@ -23,11 +23,11 @@ const systemData = `
            "select": []
        }
        
-     - 몇 명에서 여행을 떠나는지 묻는 질문:
+     - 몇 명이서 여행을 떠나는지 묻는 질문:
        {
            "subject": "travel",
            "category": "question3",
-           "question": "몇명에서 여행을 더나시나요?",
+           "question": "몇 명이서 여행을 더나시나요?",
            "select": []
        }
 
@@ -36,7 +36,7 @@ const systemData = `
            "subject": "travel",
            "category": "question4",
            "question": "어떤 여행 분위기를 원하시나요?",
-           "select": ["커플여행", "가족여행", "우정여행"]
+           "select": []
        }
 
      - 원하는 숙소 유형을 묻는 질문:
@@ -44,7 +44,7 @@ const systemData = `
            "subject": "travel",
            "category": "question5",
            "question": "어떤 숙소 유형을 원하시나요?",
-           "select": ["리조트", "호텔", "펜션", "게스트 하우스", "캠핑", "글램핑"]
+           "select": []
        }
 
      - 원하는 교통수단을 묻는 질문:
@@ -52,7 +52,7 @@ const systemData = `
            "subject": "travel",
            "category": "question6",
            "question": "어떤 교통수단을 원하시나요?",
-           "select": ["자차", "렌트카", "대중교통"]
+           "select": ["자차", "대중교통"]
        }
 
 3. 일정 작성
