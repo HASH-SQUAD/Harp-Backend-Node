@@ -30,7 +30,7 @@ const UpdatePlan = async (req, res) => {
         return res
           .status(200)
           .send(
-            authUtil.jwtSent(200, '회원정보가 정상적으로 수정되었습니다.')
+            authUtil.jwtSent(200, '일정이 정상적으로 수정되었습니다.')
           );
       }
     }

@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       locationData: {
-        type: DataTypes.JSON,
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      divide: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
       userId: {
