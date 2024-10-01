@@ -26,7 +26,7 @@
 					"text": {
 						"subject": "date",
 						"category": "question1",
-						"question": "어디로 가고 싶으신가요? 부산 해운대, 강원도 춘천과 같은 형식으로 입력해주세요!",
+						"question": "어디로 가고 싶으신가요? ex)부산 해운대, 강원도 춘천",
 						"select": []
 					}
 				}
