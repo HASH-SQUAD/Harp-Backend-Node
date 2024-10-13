@@ -38,10 +38,9 @@ const { validateToken } = require('../../../middlewares/AuthMiddleware.js');
 router.get('/google/authstate', validateToken, AuthState);
 
 const Logout = require('./Logout.js');
-router.get('/google/logout', Logout);
+router.delete('/google/logout', validateToken, Logout);
 
 const Refresh = require('./Refresh.js');
-const authUtil = require('../../../response/authUtil.js');
 router.post('/google/token', Refresh);
 
 module.exports = router;
