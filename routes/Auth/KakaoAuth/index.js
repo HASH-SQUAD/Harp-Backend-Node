@@ -6,6 +6,7 @@ const {
 	generateAccessToken,
 	generateRefreshToken,
 } = require('../../../tokens/jwt');
+const { validateToken } = require('../../../middlewares/AuthMiddleware.js');
 
 router.use(session({ secret: 'cats' }));
 router.use(passport.initialize());
@@ -33,14 +34,12 @@ const Fail = require('./Fail.js');
 router.get('/kakao/failure', Fail);
 
 const AuthState = require('./AuthState.js');
-const { validateToken } = require('../../../middlewares/AuthMiddleware.js');
 router.get('/kakao/authstate', validateToken, AuthState);
 
 const Logout = require('./Logout.js');
-router.get('/kakao/logout', Logout);
+router.delete('/kakao/logout', validateToken, Logout);
 
 const Refresh = require('./Refresh.js');
-const authUtil = require('../../../response/authUtil.js');
 router.post('/kakao/token', Refresh);
 
 module.exports = router;
