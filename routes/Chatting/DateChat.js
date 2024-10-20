@@ -75,9 +75,14 @@ const DateChat = async (req, res) => {
 
     const UserSurveyData = await Survey.findOne({ where: { userId } })
 
+    if (!UserSurveyData) {
+      return res.status(403).send(authUtil.successFalse(403, '설문조사를 하지 않았습니다.'));
+    }
+
     const systemMessageIndex = previousConversations.messages.findIndex(
       message => message.role === 'system'
     );
+
 
     if (systemMessageIndex !== -1) {
       const systemMessage = previousConversations.messages[systemMessageIndex];
@@ -156,6 +161,7 @@ const DateChat = async (req, res) => {
 
   } catch (error) {
     console.error('RequestChat 에러:', error);
+    console.log(error);
 
     if (error.response) {
       return res.status(error.response.status).send(authUtil.successFalse(error.response.status, error.response.data.error.message));

@@ -84,6 +84,10 @@ const TravelChat = async (req, res) => {
 
 		const UserSurveyData = await Survey.findOne({ where: { userId } })
 
+		if (!UserSurveyData) {
+      return res.status(403).send(authUtil.successFalse(403, '설문조사를 하지 않았습니다.'));
+    }
+
 		const systemMessageIndex = previousConversations.messages.findIndex(
 			message => message.role === 'system'
 		);
