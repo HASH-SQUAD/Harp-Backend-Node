@@ -39,6 +39,6 @@ module.exports = (sequelize, DataTypes) => {
     Wish.belongsTo(models.Users, { foreignKey: 'userId' });
     Wish.belongsTo(models.Community, { foreignKey: 'communityId' });
   };
-  
+
   return Wish;
 };
