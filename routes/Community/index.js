@@ -9,6 +9,9 @@ router.post('/', validateToken, createPost);
 const GetAllPost = require('./GetAllPost.js')
 router.get('/', GetAllPost)
 
+const GetAllPostForTag = require('./GetAllPostForTag.js')
+router.post('/fortag', GetAllPostForTag)
+
 const AddWish = require('./AddWish.js');
 router.post('/wish/add/:id', validateToken, AddWish);
 
