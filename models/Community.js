@@ -15,6 +15,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      tag: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        defaultValue: [],
+        get() {
+          const rawValue = this.getDataValue('tag');
+          return rawValue ? JSON.parse(rawValue) : [];
+        },
+        set(value) {
+          this.setDataValue('tag', JSON.stringify(value));
+        }
+      },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
