@@ -8,6 +8,9 @@ const GetAllPost = async (req, res) => {
         'communityId',
         'title',
         'des',
+        'tag',
+        'createdAt',
+        'updatedAt',
         [sequelize.fn('COUNT', sequelize.col('Wishes.wishId')), 'wishCount']
       ],
       include: [{
@@ -15,13 +18,39 @@ const GetAllPost = async (req, res) => {
         attributes: [],
         required: false
       }],
-      group: ['Community.communityId', 'Community.title', 'Community.des'],
+      group: [
+        'Community.communityId',
+        'Community.title',
+        'Community.des',
+        'Community.tag',
+        'Community.createdAt',
+        'Community.updatedAt'
+      ],
       raw: true
     });
 
+    const Formatting = communities.map(community => ({
+      ...community,
+      tag: JSON.parse(community.tag || '[]'),
+      createdAt: new Date(community.createdAt).toLocaleString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
+      updatedAt: new Date(community.updatedAt).toLocaleString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    }));
+
     return res
       .status(200)
-      .send(authUtil.successTrue(200, '게시글 찾음', { communities }));
+      .send(authUtil.successTrue(200, '게시글 찾음', { Formatting }));
   } catch (error) {
     console.error(error);
     return res.status(500).send(authUtil.unknownError({ error: error.message }));
