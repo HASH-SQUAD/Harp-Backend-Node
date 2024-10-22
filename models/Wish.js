@@ -1,19 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
-  const Community = sequelize.define(
-    'Community',
+  const Wish = sequelize.define(
+    'Wish',
     {
-      communityId: {
+      wishId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-      },
-      title: {
-        type: DataTypes.TEXT,
-        allowNull: true,
-      },
-      des: {
-        type: DataTypes.TEXT,
-        allowNull: true,
       },
       userId: {
         type: DataTypes.INTEGER,
@@ -21,6 +13,16 @@ module.exports = (sequelize, DataTypes) => {
         references: {
           model: 'Users',
           key: 'userId',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
+      communityId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Community',
+          key: 'communityId',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
@@ -33,10 +35,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Community.associate = models => {
-    Community.belongsTo(models.Users, { foreignKey: 'userId', as: 'creator' });
-    Community.belongsToMany(models.Users, { through: models.Wish, foreignKey: 'communityId', as: 'wishingUsers' });
+  Wish.associate = models => {
+    Wish.belongsTo(models.Users, { foreignKey: 'userId' });
+    Wish.belongsTo(models.Community, { foreignKey: 'communityId' });
   };
-
-  return Community;
+  
+  return Wish;
 };
