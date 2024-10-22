@@ -21,4 +21,8 @@ router.use('/chat', ChattingRouter);
 const PlanRouter = require('./Plan')
 router.use('/plan', PlanRouter)
 
+// 커뮤니티
+const CommunityRouter = require('./Community')
+router.use('/community', CommunityRouter)
+
 module.exports = router;
