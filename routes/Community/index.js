@@ -18,4 +18,7 @@ router.post('/wish/add/:id', validateToken, AddWish);
 const UpdatePost = require('./UpdatePost.js')
 router.put('/update/:id', validateToken, UpdatePost);
 
+const DeletePost = require('./DeletePost.js')
+router.delete('/delete/:id', validateToken, DeletePost)
+
 module.exports = router;
