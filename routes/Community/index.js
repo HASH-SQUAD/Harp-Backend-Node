@@ -15,5 +15,7 @@ router.post('/fortag', GetAllPostForTag)
 const AddWish = require('./AddWish.js');
 router.post('/wish/add/:id', validateToken, AddWish);
 
+const UpdatePost = require('./UpdatePost.js')
+router.put('/update/:id', validateToken, UpdatePost);
 
 module.exports = router;
