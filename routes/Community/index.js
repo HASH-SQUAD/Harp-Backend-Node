@@ -12,8 +12,8 @@ router.get('/', GetAllPost)
 const GetAllPostForTag = require('./GetAllPostForTag.js')
 router.post('/fortag', GetAllPostForTag)
 
-const AddWish = require('./AddWish.js');
-router.post('/wish/add/:id', validateToken, AddWish);
+const Wish = require('./Wish.js');
+router.post('/wish/:id', validateToken, Wish);
 
 const UpdatePost = require('./UpdatePost.js')
 router.put('/update/:id', validateToken, UpdatePost);

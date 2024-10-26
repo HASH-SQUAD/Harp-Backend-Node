@@ -8,7 +8,8 @@ const AddComments = async (req, res) => {
   try {
     if (isCommentForComment) {
       const ParentComment = await Comments.findOne({ where: { commnetsId: parentComment } })
-      if (!ParentComment) {
+      console.log(ParentComment);
+      if (!ParentComment || ParentComment.dataValues.isCommentForComment) {
         return res
           .status(404)
           .send(authUtil.successTrue(404, '부모 댓글을 찾을 수 없습니다.'));
