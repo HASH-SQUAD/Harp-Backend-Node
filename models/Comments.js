@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: true,
       },
-      isCommentForCommnet: {
+      isCommentForComment: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
         defaultValue: false
