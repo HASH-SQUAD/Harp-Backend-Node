@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const Commnets = sequelize.define(
-    'Commnets',
+  const Comments = sequelize.define(
+    'Comments',
     {
       commnetsId: {
         type: DataTypes.INTEGER,
@@ -53,12 +53,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Commnets.associate = models => {
-    Commnets.belongsTo(models.Users, { foreignKey: 'userId', as: 'author' });
-    Commnets.belongsTo(models.Community, { foreignKey: 'communityId', as: 'Communities' });
-    Commnets.hasMany(models.Commnets, { foreignKey: 'parentComment', as: 'replies' });
-    Commnets.belongsTo(models.Commnets, { foreignKey: 'parentComment', as: 'parentCommnets' });
+  Comments.associate = models => {
+    Comments.belongsTo(models.Users, { foreignKey: 'userId', as: 'author' });
+    Comments.belongsTo(models.Community, { foreignKey: 'communityId', as: 'Communities' });
+    Comments.hasMany(models.Comments, { foreignKey: 'parentComment', as: 'replies' });
+    Comments.belongsTo(models.Comments, { foreignKey: 'parentComment', as: 'parentComments' });
   };
 
-  return Commnets;
+  return Comments;
 };

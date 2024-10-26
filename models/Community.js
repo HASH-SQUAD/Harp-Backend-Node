@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     Community.belongsTo(models.Users, { foreignKey: 'userId', as: 'creator' });
     Community.belongsToMany(models.Users, { through: models.Wish, foreignKey: 'communityId', as: 'wishingUsers' });
     Community.hasMany(models.Wish, { foreignKey: 'communityId' });
-    Community.hasMany(models.Commnets, {
+    Community.hasMany(models.Comments, {
       foreignKey: 'communityId',
       as: 'comments'
     });
