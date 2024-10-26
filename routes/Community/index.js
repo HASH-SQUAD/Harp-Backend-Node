@@ -21,4 +21,7 @@ router.put('/update/:id', validateToken, UpdatePost);
 const DeletePost = require('./DeletePost.js')
 router.delete('/delete/:id', validateToken, DeletePost)
 
+const AddComment = require('./AddComments.js')
+router.post('/comment/', validateToken, AddComment)
+
 module.exports = router;
