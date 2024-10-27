@@ -34,4 +34,7 @@ router.get('/wish/', validateToken, GetWish)
 const AddComment = require('./AddComments.js')
 router.post('/comment/', validateToken, AddComment)
 
+const DeleteComment = require('./DeleteComments.js')
+router.delete('/comment/delete/:id', validateToken, DeleteComment)
+
 module.exports = router;
