@@ -66,6 +66,10 @@ module.exports = (sequelize, DataTypes) => {
     Users.belongsToMany(models.Community, { through: models.Wish, foreignKey: 'userId', as: 'wishedCommunities' });
     Users.hasMany(models.Survey, { foreignKey: 'userId', sourceKey: 'userId' });
     Users.hasMany(models.Plan, { foreignKey: 'userId', sourceKey: 'userId' });
+    Users.hasMany(models.Comments, {
+      foreignKey: 'userId',
+      as: 'userComments'
+    });
   };
 
   return Users;

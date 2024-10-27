@@ -1,5 +1,5 @@
 const authUtil = require('../../response/authUtil.js');
-const { Community, Wish, sequelize } = require('../../models');
+const { Community, Wish, sequelize, Comments } = require('../../models');
 
 const GetAllPost = async (req, res) => {
   try {
@@ -11,13 +11,22 @@ const GetAllPost = async (req, res) => {
         'tag',
         'createdAt',
         'updatedAt',
-        [sequelize.fn('COUNT', sequelize.col('Wishes.wishId')), 'wishCount']
+        [sequelize.fn('COUNT', sequelize.col('Wishes.wishId')), 'wishCount'],
+        [sequelize.fn('COUNT', sequelize.col('comments.commnetsId')), 'commentCount']
       ],
-      include: [{
-        model: Wish,
-        attributes: [],
-        required: false
-      }],
+      include: [
+        {
+          model: Wish,
+          attributes: [],
+          required: false
+        },
+        {
+          model: Comments,
+          as: 'comments',
+          attributes: [],
+          required: false
+        }
+      ],
       group: [
         'Community.communityId',
         'Community.title',
@@ -32,6 +41,8 @@ const GetAllPost = async (req, res) => {
     const Formatting = communities.map(community => ({
       ...community,
       tag: JSON.parse(community.tag || '[]'),
+      wishCount: parseInt(community.wishCount),
+      commentCount: parseInt(community.commentCount),
       createdAt: new Date(community.createdAt).toLocaleString('ko-KR', {
         year: 'numeric',
         month: '2-digit',
