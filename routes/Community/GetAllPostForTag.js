@@ -11,6 +11,7 @@ const GetAllPostForTag = async (req, res) => {
         'title',
         'des',
         'tag',
+        'images',
         'createdAt',
         'updatedAt',
         [sequelize.fn('COUNT', sequelize.col('Wishes.wishId')), 'wishCount']
@@ -25,6 +26,7 @@ const GetAllPostForTag = async (req, res) => {
         'Community.title',
         'Community.des',
         'Community.tag',
+        'Community.images',
         'Community.createdAt',
         'Community.updatedAt'
       ],
@@ -39,6 +41,7 @@ const GetAllPostForTag = async (req, res) => {
     const Formatting = FilterPost.map(community => ({
       ...community,
       tag: JSON.parse(community.tag || '[]'),
+      images: JSON.parse(community.images || '[]'),
       createdAt: community.createdAt,
       updatedAt: community.updatedAt
     }));

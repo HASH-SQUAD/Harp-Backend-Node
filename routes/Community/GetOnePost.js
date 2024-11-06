@@ -12,6 +12,7 @@ const GetOnePost = async (req, res) => {
         'title',
         'des',
         'tag',
+        'images',
         'createdAt',
         'updatedAt',
         [sequelize.fn('COUNT', sequelize.col('Wishes.wishId')), 'wishCount']
@@ -28,6 +29,7 @@ const GetOnePost = async (req, res) => {
         'Community.title',
         'Community.des',
         'Community.tag',
+        'Community.images',
         'Community.createdAt',
         'Community.updatedAt'
       ],
@@ -89,6 +91,7 @@ const GetOnePost = async (req, res) => {
     const formattedResponse = {
       ...community,
       tag: JSON.parse(community.tag || '[]'),
+      images: JSON.parse(community.images || '[]'),
       wishCount: parseInt(community.wishCount),
       createdAt: community.createdAt,
       updatedAt: community.updatedAt,
