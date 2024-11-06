@@ -2,7 +2,7 @@ const authUtil = require('../../response/authUtil.js');
 const { Community } = require('../../models')
 
 const UpdatePost = async (req, res) => {
-  const { title, des, tag } = req.body
+  const { title, des, tag, images } = req.body
   const postId = req.params.id
 
   try {
@@ -18,7 +18,8 @@ const UpdatePost = async (req, res) => {
       await Community.update({
         title,
         des,
-        tag
+        tag,
+        images
       }, { where: { communityId: postId } });
       return res
         .status(200)

@@ -2,13 +2,14 @@ const authUtil = require('../../response/authUtil.js');
 const { Community } = require('../../models')
 
 const CreatePost = async (req, res) => {
-  const { title, des, tag } = req.body
+  const { title, des, tag, images } = req.body
 
   try {
     await Community.create({
       title,
       des,
       tag,
+      images,
       userId: req.user.dataValues.userId
     })
 

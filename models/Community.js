@@ -27,6 +27,18 @@ module.exports = (sequelize, DataTypes) => {
           this.setDataValue('tag', JSON.stringify(value));
         }
       },
+      images: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        defaultValue: [],
+        get() {
+          const rawValue = this.getDataValue('images');
+          return rawValue ? JSON.parse(rawValue) : [];
+        },
+        set(value) {
+          this.setDataValue('images', JSON.stringify(value));
+        }
+      },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
