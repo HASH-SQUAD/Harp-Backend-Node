@@ -23,5 +23,9 @@ router.use('/survey', SurveyRouter);
 const AdminRouter = require('./Admin');
 router.use('/admin', AdminRouter);
 
+// 유저 정보 라우터
+const AllAuthState = require('./AllAuthState');
+router.use('/authstate', AllAuthState);
+
 
 module.exports = router;
