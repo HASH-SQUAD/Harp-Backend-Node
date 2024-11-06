@@ -43,20 +43,8 @@ const GetAllPost = async (req, res) => {
       tag: JSON.parse(community.tag || '[]'),
       wishCount: parseInt(community.wishCount),
       commentCount: parseInt(community.commentCount),
-      createdAt: new Date(community.createdAt).toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
-      updatedAt: new Date(community.updatedAt).toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      })
+      createdAt: community.createdAt,
+      updatedAt: community.updatedAt
     }));
 
     return res
