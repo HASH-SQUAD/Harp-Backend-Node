@@ -73,26 +73,14 @@ const GetOnePost = async (req, res) => {
           .filter(reply => reply.parentComment === comment.commnetsId)
           .map(reply => ({
             ...reply,
-            createdAt: new Date(reply.createdAt).toLocaleString('ko-KR', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit'
-            }),
-            updatedAt: new Date(reply.updatedAt).toLocaleString('ko-KR', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit'
-            })
+            createdAt: reply.createdAt,
+            updatedAt: reply.updatedAt
           }));
 
         acc.push({
           ...comment,
           repliesCount,
-          replies 
+          replies
         });
       }
       return acc;
@@ -102,36 +90,12 @@ const GetOnePost = async (req, res) => {
       ...community,
       tag: JSON.parse(community.tag || '[]'),
       wishCount: parseInt(community.wishCount),
-      createdAt: new Date(community.createdAt).toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
-      updatedAt: new Date(community.updatedAt).toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
+      createdAt: community.createdAt,
+      updatedAt: community.updatedAt,
       comments: structuredComments.map(comment => ({
         ...comment,
-        createdAt: new Date(comment.createdAt).toLocaleString('ko-KR', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        }),
-        updatedAt: new Date(comment.updatedAt).toLocaleString('ko-KR', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit'
-        })
+        createdAt: comment.createdAt,
+        updatedAt: comment.updatedAt
       }))
     };
 

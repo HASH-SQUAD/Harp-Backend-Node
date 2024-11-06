@@ -39,20 +39,8 @@ const GetAllPostForTag = async (req, res) => {
     const Formatting = FilterPost.map(community => ({
       ...community,
       tag: JSON.parse(community.tag || '[]'),
-      createdAt: new Date(community.createdAt).toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      }),
-      updatedAt: new Date(community.updatedAt).toLocaleString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit'
-      })
+      createdAt: community.createdAt,
+      updatedAt: community.updatedAt
     }));
 
     return res
