@@ -4,6 +4,8 @@ const authUtil = require('../../response/authUtil.js');
 const CreatePlan = async (req, res) => {
   const { planName, mainImg, startDate, endDate, data } = req.body;
 
+  console.log(data);
+
   try {
     await Plan.create({
       planName,

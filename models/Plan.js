@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: true,
 			},
-			impressions: {
-				type: DataTypes.STRING,
+			data: {
+				type: DataTypes.JSON,
 				allowNull: true,
 			},
 			userId: {
