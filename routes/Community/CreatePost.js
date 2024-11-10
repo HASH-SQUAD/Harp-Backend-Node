@@ -4,6 +4,8 @@ const { Community } = require('../../models')
 const CreatePost = async (req, res) => {
   const { title, des, tag, images } = req.body
 
+  console.log(req.body);
+
   try {
     await Community.create({
       title,

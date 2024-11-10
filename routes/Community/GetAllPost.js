@@ -42,7 +42,7 @@ const GetAllPost = async (req, res) => {
 
     const Formatting = communities.map(community => ({
       ...community,
-      tag: JSON.parse(community.tag || '[]'),
+      tag: community.tag,
       images: JSON.parse(community.images || '[]'),
       wishCount: parseInt(community.wishCount),
       commentCount: parseInt(community.commentCount),
