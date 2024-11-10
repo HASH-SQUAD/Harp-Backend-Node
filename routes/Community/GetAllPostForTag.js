@@ -4,6 +4,8 @@ const { Community, Wish, sequelize } = require('../../models');
 const GetAllPostForTag = async (req, res) => {
   const { tag } = req.body;
 
+  const tagsArray = Array.isArray(tag) ? tag : [tag];
+
   try {
     const communities = await Community.findAll({
       attributes: [
@@ -34,13 +36,13 @@ const GetAllPostForTag = async (req, res) => {
     });
 
     const FilterPost = communities.filter(community => {
-      const communityTags = JSON.parse(community.tag || '[]');
-      return tag.some(searchTag => communityTags.includes(searchTag));
+      const communityTags = community.tag;
+      return tagsArray.some(searchTag => communityTags.includes(searchTag));
     });
 
     const Formatting = FilterPost.map(community => ({
       ...community,
-      tag: JSON.parse(community.tag || '[]'),
+      tag: community.tag,
       images: JSON.parse(community.images || '[]'),
       createdAt: community.createdAt,
       updatedAt: community.updatedAt

@@ -16,16 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       tag: {
-        type: DataTypes.JSON,
+        type: DataTypes.TEXT,
         allowNull: true,
-        defaultValue: [],
-        get() {
-          const rawValue = this.getDataValue('tag');
-          return rawValue ? JSON.parse(rawValue) : [];
-        },
-        set(value) {
-          this.setDataValue('tag', JSON.stringify(value));
-        }
       },
       images: {
         type: DataTypes.JSON,
@@ -52,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       paranoid: true,
-      charset: 'utf8',
-      collate: 'utf8_general_ci',
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_unicode_ci',
     }
   );
 

@@ -90,7 +90,7 @@ const GetOnePost = async (req, res) => {
 
     const formattedResponse = {
       ...community,
-      tag: JSON.parse(community.tag || '[]'),
+      tag: community.tag,
       images: JSON.parse(community.images || '[]'),
       wishCount: parseInt(community.wishCount),
       createdAt: community.createdAt,
