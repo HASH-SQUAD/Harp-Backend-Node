@@ -22,6 +22,11 @@ const GetOnePost = async (req, res) => {
           model: Wish,
           attributes: [],
           required: false
+        },
+        {
+          model: Users,
+          as: 'creator',
+          attributes: ['userId', 'nickname', 'profileImg'],
         }
       ],
       group: [
@@ -31,7 +36,10 @@ const GetOnePost = async (req, res) => {
         'Community.tag',
         'Community.images',
         'Community.createdAt',
-        'Community.updatedAt'
+        'Community.updatedAt',
+        'creator.userId',
+        'creator.nickname',
+        'creator.profileImg'
       ],
       raw: true
     });
