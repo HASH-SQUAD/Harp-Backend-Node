@@ -28,7 +28,10 @@ const Wish = require('./Wish.js');
 router.post('/wish/change/:id', validateToken, Wish);
 
 const GetWish = require('./GetWish.js')
-router.get('/wish/', validateToken, GetWish)
+router.get('/wish', validateToken, GetWish)
+
+const GetIsLike = require('./GetIsLike.js')
+router.get('/wish/islike/:id', validateToken, GetIsLike)
 
 // 댓글
 const AddComment = require('./AddComments.js')
