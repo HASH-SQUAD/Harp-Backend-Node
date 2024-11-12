@@ -73,10 +73,13 @@ const GetOnePost = async (req, res) => {
       nest: true
     });
 
+    let CommentsCount = 0
+
     const structuredComments = comments.reduce((acc, comment) => {
       if (!comment.parentComment) {
         const replies = comments.filter(reply => reply.parentComment === comment.commnetsId);
         const repliesCount = replies.length;
+        CommentsCount += repliesCount
 
         acc.push({
           ...comment,
@@ -104,6 +107,12 @@ const GetOnePost = async (req, res) => {
         updatedAt: comment.updatedAt
       }))
     };
+
+    const totalCommentsCount = structuredComments.reduce((acc, comment) => {
+      return acc + 1 + (comment.replies ? comment.replies.length : 0);
+    }, 0);
+
+    formattedResponse.CommentsCount = totalCommentsCount;
 
     return res
       .status(200)
