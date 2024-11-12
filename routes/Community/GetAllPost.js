@@ -12,8 +12,8 @@ const GetAllPost = async (req, res) => {
         'images',
         'createdAt',
         'updatedAt',
-        [sequelize.fn('COUNT', sequelize.col('Wishes.wishId')), 'wishCount'],
-        [sequelize.fn('COUNT', sequelize.col('comments.commnetsId')), 'commentCount']
+        [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('Wishes.wishId'))), 'wishCount'],
+        [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('comments.commnetsId'))), 'commentCount']
       ],
       include: [
         {
