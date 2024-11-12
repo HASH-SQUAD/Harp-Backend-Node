@@ -75,22 +75,17 @@ const GetOnePost = async (req, res) => {
 
     const structuredComments = comments.reduce((acc, comment) => {
       if (!comment.parentComment) {
-        const repliesCount = comments.filter(reply =>
-          reply.parentComment === comment.commnetsId
-        ).length;
-
-        const replies = comments
-          .filter(reply => reply.parentComment === comment.commnetsId)
-          .map(reply => ({
-            ...reply,
-            createdAt: reply.createdAt,
-            updatedAt: reply.updatedAt
-          }));
+        const replies = comments.filter(reply => reply.parentComment === comment.commnetsId);
+        const repliesCount = replies.length;
 
         acc.push({
           ...comment,
           repliesCount,
-          replies
+          isCommentForComment: repliesCount > 0,
+          replies: replies.map(reply => ({
+            ...reply,
+            isCommentForComment: true
+          }))
         });
       }
       return acc;
