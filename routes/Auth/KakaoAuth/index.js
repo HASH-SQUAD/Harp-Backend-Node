@@ -23,7 +23,7 @@ router.get('/kakao/callback', Callback, async (req, res) => {
 		const accessToken = generateAccessToken(req.user.dataValues.email);
 		const refreshToken = req.user.refreshToken;
 
-		res.redirect(`${process.env.CLIENT_ORIGIN}/auth/google/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+		res.redirect(`${process.env.CLIENT_ORIGIN}/auth/kakao/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
 	} catch (error) {
 		console.error('Error during callback processing:', error);
 		res.redirect(`${process.env.CLIENT_ORIGIN}/login`);
