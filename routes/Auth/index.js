@@ -7,9 +7,17 @@ router.use('/', GoogleRouter);
 const KakaoRouter = require('./KakaoAuth');
 router.use('/', KakaoRouter);
 
+// 자체로그인 라우터
+const SignIn = require('./SelfSign')
+router.use('/', SignIn)
+
 // 새로운 유저생성 라우터
 const NewAccountSignUpRouter = require('./NewAccountSignUp')
 router.use('/newaccount', NewAccountSignUpRouter)
+
+// 회원탈퇴 라우터
+const DeleteAccount = require('./DeleteAccount')
+router.use('/deleteuser', DeleteAccount)
 
 // 유저정보수정 라우터
 const UpdateUserRouter = require('./UpdateUser');

@@ -44,7 +44,7 @@ passport.use(
           const newRefreshToken = generateRefreshToken(
             profile._json.kakao_account.email
           );
-          await user.update({ refreshToken: newRefreshToken });
+          await user.update({ refreshToken: newRefreshToken, deletedAt: null });
           return done(null, user);
         }
       } catch (err) {

@@ -40,7 +40,7 @@ passport.use(
           });
         } else {
           const newRefreshToken = generateRefreshToken(profile.emails[0].value);
-          await user.update({ refreshToken: newRefreshToken });
+          await user.update({ refreshToken: newRefreshToken, deletedAt: null });
         }
 
         return done(null, user);
