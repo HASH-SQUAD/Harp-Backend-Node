@@ -6,6 +6,7 @@ const { AI, Survey } = require('../../models');
 const { where } = require('sequelize');
 
 const conversationPath = path.join(__dirname, './system/TravelData.json');
+const system = require('./system/TravelSystem.js')
 
 const TravelChat = async (req, res) => {
 	const { previousConversation, location } = req.body;
@@ -22,6 +23,7 @@ const TravelChat = async (req, res) => {
 		}
 
 		const Conversation = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
+		Conversation.messages[0].content[0].text = system
 
 		let previousConversations = aiRecord.dataValues.conversation || { ...Conversation, messages: [] };
 
@@ -85,8 +87,8 @@ const TravelChat = async (req, res) => {
 		const UserSurveyData = await Survey.findOne({ where: { userId } })
 
 		if (!UserSurveyData) {
-      return res.status(403).send(authUtil.successFalse(403, '설문조사를 하지 않았습니다.'));
-    }
+			return res.status(403).send(authUtil.successFalse(403, '설문조사를 하지 않았습니다.'));
+		}
 
 		const systemMessageIndex = previousConversations.messages.findIndex(
 			message => message.role === 'system'
