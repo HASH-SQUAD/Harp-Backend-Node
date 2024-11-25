@@ -15,7 +15,7 @@ const Jwt = async (req, res) => {
         email,
       },
     });
-    console.log(user.dataValues.refreshToken);
+
     if (user.dataValues.refreshToken === refreshToken) {
       const accessToken = generateAccessToken(user.email);
       return res
@@ -25,7 +25,7 @@ const Jwt = async (req, res) => {
             200,
             '재발급 했습니다.',
             accessToken,
-            refreshToken
+            user.dataValues.refreshToken
           )
         );
     } else {
