@@ -5,6 +5,8 @@ const authUtil = require('../../response/authUtil.js');
 const { AI, Survey } = require('../../models');
 
 const conversationPath = path.join(__dirname, './system/DateData.json');
+const system = require('./system/DateSystem.js')
+
 
 const DateChat = async (req, res) => {
   const { previousConversation, location } = req.body;
@@ -21,6 +23,7 @@ const DateChat = async (req, res) => {
     }
 
     const Conversation = JSON.parse(fs.readFileSync(conversationPath, 'utf8'));
+    Conversation.messages[0].content[0].text = system
 
     let previousConversations = aiRecord.dataValues.conversation || { ...Conversation, messages: [] };
 
