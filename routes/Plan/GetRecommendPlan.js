@@ -10,7 +10,7 @@ const GetRecommendPlan = async (req, res) => {
 
     if (!PlanData || PlanData.length === 0) {
       return res
-        .status(404)
+        .status(200)
         .send(authUtil.successTrue(200, '일정이 존재하지 않습니다.', { PlanData }));
     } else {
       return res
