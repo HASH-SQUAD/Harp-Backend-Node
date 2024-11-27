@@ -9,6 +9,9 @@ router.post('/', validateToken, CreatePlan);
 const GetPlanAll = require('./GetPlanAll.js')
 router.get('/', validateToken, GetPlanAll)
 
+const GetPlanOld = require("./GetOldPlanAll.js")
+router.get('/old', validateToken, GetPlanOld)
+
 const UpdatePlanAll = require('./UpdatePlan.js')
 router.put('/putplan/:id', validateToken, UpdatePlanAll)
 
